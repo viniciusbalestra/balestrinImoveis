@@ -43,6 +43,10 @@
     color: var(--cor-branco);
 }
 
+main {
+    background-color:#ebeaea;
+}
+
 #home {
     height: 100vh;
     width: 100%;
@@ -105,4 +109,99 @@ h1 {
     display: flex;
     justify-content: center;
     gap: 10px;
+}
+
+#citacao {
+    height: 31.25rem;
+    display: flex;
+    align-items: center;
+}
+
+#bloco-citacao {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    height: 80%;
+    margin: 10px auto;
+    background-color: var(--cor-branco);
+    border: 1px solid transparent;
+    border-radius: 5px;
+}
+
+q {
+    padding-left: 1.875rem;
+    border-left: 2.5px var(--cor-primaria) solid;
+    font-size: 20px;
+    quotes: "“" "”" "‘" "’"; /* Define os caracteres de aspas */
+  }
+  
+  q:before {
+    font-size: 40px;
+    color: rgb(255, 94, 0);
+    content: open-quote; /* Abre as aspas */
+  }
+  
+  q:after {
+    text-align:right;
+    font-size: 40px;
+    color: rgb(255, 94, 0);
+    content: close-quote; /* Fecha as aspas */
+  }
+
+#rodape {
+    display: flex;
+    width: 100%;
+    background-color: var(--cor-primaria);
+    color: var(--cor-secundaria);
+    text-decoration: none;
+    min-height: 11.25rem;
+}
+
+#rodape-conteudo {
+    font-family: var(--fonte-principal);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0.625rem auto;
+    gap: 3rem;
+}
+
+#rodape-logo {
+    max-width: 300px;
+    padding-right: 50px;
+    border-right: var(--cor-secundaria) 2px solid;
+}
+
+.rodape-logo {
+    object-fit: contain;
+    height: auto;
+    max-width: 2rem;
+}
+
+#rodape-contatos {
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+#rodape-contatos span {
+    display: flex;
+    gap: 0.625rem;
+}
+
+.rodape-textos {
+    display: flex;
+    flex-direction: column;
+    min-width: fit-content;
+    gap: 3px;
+}
+
+.rodape-textos a {
+    font-size: 14px;
+}
+
+.rodape-link {
+    color: var(--cor-secundaria);
 }
