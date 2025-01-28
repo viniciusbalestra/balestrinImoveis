@@ -46,6 +46,10 @@ main {
     background-color:#ebeaea;
 }
 
+#main-escuro {
+    background-color: var(--cor-primaria);
+}
+
 #home {
     height: 100vh;
     width: 100%;
