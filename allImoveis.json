@@ -1,1 +1,57 @@
-[]
+[
+  {
+    "id": 1111,
+    "categoria": "planta",
+    "titulo": "Inside Home Club",
+    "slogan": "O clube na sua casa",
+    "localizacao": "Rua: Primeira 478, Norteimoveis",
+    "valor": null,
+    "tipo": null,
+    "metragem": null,
+    "fotos": null
+  },
+  {
+    "id": 2222,
+    "categoria": "planta",
+    "titulo": "Apartamento no Centro",
+    "slogan": "O que você merece",
+    "localizacao": "Rua Principal, 123",
+    "valor": null,
+    "tipo": null,
+    "metragem": null,
+    "fotos": null
+  },
+  {
+    "id": 3333,
+    "categoria": "planta",
+    "titulo": "Casa com Piscina",
+    "slogan": "Lazer para toda a família",
+    "localizacao": "Avenida das Flores, 456",
+    "valor": null,
+    "tipo": null,
+    "metragem": null,
+    "fotos": null
+  },
+  {
+    "id": 4444,
+    "categoria": "planta",
+    "titulo": "Sobrado Moderno",
+    "slogan": "Design e sofisticação",
+    "localizacao": "Alameda dos Pássaros, 789",
+    "valor": null,
+    "tipo": null,
+    "metragem": null,
+    "fotos": null
+  },
+  {
+    "id": 5555,
+    "categoria": "planta",
+    "titulo": "Casa na praia isolada",
+    "slogan": "O que você merece",
+    "localizacao": "Alameda das aves, 246",
+    "valor": null,
+    "tipo": null,
+    "metragem": null,
+    "fotos": null
+  }
+]

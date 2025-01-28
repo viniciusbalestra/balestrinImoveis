@@ -1,6 +1,9 @@
 ///Executa as consultas no banco de dados
 const { connect, pool } = require('./connection');
 const fs = require('fs/promises');
+const path = require('path');
+
+const jsonFilePath = path.join(__dirname, 'allImoveis.json');
 
 ///consulta os imoveis no banco de dados (separa por categoria)
 async function getAllImoveis(categoria) {
@@ -26,12 +29,12 @@ async function main() {
         console.log("Imóveis de terceiros:", imoveisTerceiros);
 
         imoveisPlanta.forEach(imovel => {
-            console.log(`ID: ${imovel.id}, Categoria: ${imovel.categoria}, Titulo: ${imovel.titulo}, Slogan: ${imovel.slogan}, Localizacao: ${imovel.localizacao}`);
+            console.log(`ID: ${imovel.id}, Categoria: ${imovel.categoria}, Titulo: ${imovel.titulo}, Slogan: ${imovel.slogan}, Localizacao: ${imovel.localizacao}, fotos: ${imovel.fotos}`);
         });
 
 
         imoveisTerceiros.forEach(imovel => {
-            console.log(`ID: ${imovel.id}, Categoria: ${imovel.categoria}, Titulo: ${imovel.titulo}, Localizacao: ${imovel.localizacao}, Valor: ${imovel.valor}, Tipo ${imovel.tipo}, Metragem: ${imovel.metragem}`);
+            console.log(`ID: ${imovel.id}, Categoria: ${imovel.categoria}, Titulo: ${imovel.titulo}, Localizacao: ${imovel.localizacao}, Valor: ${imovel.valor}, Tipo ${imovel.tipo}, Metragem: ${imovel.metragem}, fotos: ${imovel.fotos}`);
         });
 
         const allImoveis = [...imoveisPlanta, ...imoveisTerceiros];
@@ -48,6 +51,24 @@ async function main() {
         console.error("Erro na função main:", error)
     };
 };
+
+async function getAllImoveisFromJson() {
+    try {
+        const data = await fs.readFile(jsonFilePath, 'utf-8');
+        return JSON.parse(data);
+    } catch (error) {
+        console.error('Erro ao ler allImoveis.json: ', error);
+        
+        if (error.code === 'ENOENT') {
+            console.log('Arquivo allImoveis.json não encontrado.Gerando um novo...');
+
+            await main();
+            return getAllImoveisFromJson();
+        };
+
+        return [];
+    }
+}
 
 ///Insere imóveis ao banco de dados
 async function insertImoveis(imoveis) {
@@ -68,11 +89,12 @@ async function insertImoveis(imoveis) {
                     localizacao = VALUES(localizacao),
                     valor = VALUES(valor),
                     tipo = VALUES(tipo),
-                    metragem = VALUES(metragem);
+                    metragem = VALUES(metragem),
+                    fotos = VALUES(fotos);
                 `;
             
             const values = [
-                imovel.id, imovel.categoria, imovel.titulo, imovel.slogan, imovel.localizacao, imovel.valor, imovel.tipo, imovel.metragem
+                imovel.id, imovel.categoria, imovel.titulo, imovel.slogan, imovel.localizacao, imovel.valor, imovel.tipo, imovel.metragem, imovel.fotos
             ];
 
         try{
@@ -103,6 +125,6 @@ async function queryDatabase() {
 }
 queryDatabase();
 
-module.exports = { getAllImoveis, insertImoveis, queryDatabase};
+module.exports = {getAllImoveis, insertImoveis, queryDatabase, getAllImoveisFromJson};
 
 main();

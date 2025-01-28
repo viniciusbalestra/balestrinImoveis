@@ -1,3 +1,5 @@
+const investimentos = document.getElementById('investimentos');
+
 /*
 Features:
     1. Sistema de login/senha
@@ -10,6 +12,7 @@ Features:
 */
 
 ///Validação de usuário e senha (função admin)
+/*
 function validarLogin(inputLogin, inputSenha) {
     
     const inputLogin = document.getElementById("login").value;
@@ -26,30 +29,66 @@ function validarLogin(inputLogin, inputSenha) {
         ///libera acesso à interface de admin
     };
 };
+*/
 
-///Alimenta a pagina com infos do banco de dados
-function outputImoveis () {
-
-    const investimentoPhoto = document.getElementById("investimento-photo");
-    const investimentoPhotoImg = document.createElement("img");
-
-    ///caminho para a foto
-    investimentoPhoto.src = "";
-    ///descricao da foto
-    investimentoPhoto.alt = "capa do anuncio";
-
-    investimentoPhoto.appendChild(investimentoPhotoImg);
+function imoveisToHtml(imovel) {
+    return `
+        <div class="investimento">
+            <div class="investimento-info">
+                <span id="investimento-photo">
+                    <img src="/src/assets/background/olympus.png" alt="foto do investimento">
+                </span>
+                <h3 class="investimento-titulo">${imovel.titulo}</h3>
+                <p class="investimento-descricao">${imovel.slogan}</p>
+            </div>
+            <div class="investimento-info investimento-info-2">
+                <div class="detail detail-1">
+                    <img src="" alt="">
+                    <p>${imovel.localizacao}</p>
+                </div>
+            </div>
+        </div>
+    `;
 };
 
-///Alimenta a aba de imóveis em destaque na home
-function imoveisDestaque () {
-    
-  
-};
+///Alimenta a pagina com a array imoveisDestaqueArray
+async function pushImoveisDestaque() {
+    try {
+        const response = await fetch('/allImoveis.json');
+        console.log(response);
 
-///Alimenta a página de investimentos
-function imoveisInvestimentos () {
+        if (!response.ok) {
+            throw new Error(`Erro na requisição: ${response.status} ${response.statusText}`)
+        }
 
-};
+        const imoveisDestaque = await response.json();
+        console.log(imoveisDestaque);//imoveis destaque em json (4 primeiros)
 
-validarLogin(inputLogin, inputSenha);
+        if (!imoveisDestaque || imoveisDestaque.length === 0) {
+            console.log('Nenhum imóvel em destaque para exibir.');
+
+            if (investimentos) {
+                investimentos.innerHTML = "<p>Nenhum imóvel em destaque encontrado.</p>";
+            };
+            
+            return;
+        };
+
+        const imoveisHtml = imoveisDestaque.map(imoveisToHtml).join('');
+        console.log(imoveisHtml); //concatenação dos imoveis destaque em html
+
+        if (investimentos) {
+            investimentos.innerHTML = imoveisHtml;
+        } else {
+            console.error('Elemento ID "investimentos" não encontrado.')
+        };
+    } catch (error) {
+        console.error("Erro ao processar imóveis em destaque:", error);
+        if (investimentos) {
+            investimentos.innerHTML = "<p>Ocorreu um erro ao carregar os imóveis.</p>";
+        };
+    };
+}
+
+
+pushImoveisDestaque();

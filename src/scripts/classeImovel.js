@@ -1,27 +1,34 @@
 class Imovel {
-    idImovel;
-    tituloImovel;
-    descricaoImovel;
-    localizacaoImovel;
-    tamanhoTerrenoImovel;
-    tamanhoAreaConstImovel;
-    qtdQuartosImovel;
-    qtdBanheirosImovel;
-    valorImovel;
-    destaqueImovel;
-    eDisponivel;
+    id;
+    categoria; ///planta, terceiros
+    titulo;
+    slogan;
+    localizacao;
+    valor;
+    tipo;
+    descricao;
+    metragem;
+    tamanhoAreaConst;
+    qtdQuartos;
+    qtdBanheiros;
+    destaque = false;
+    eDisponivel = false;
+    fotos;
 
-    constructor (idImovel, tituloImovel, descricaoImovel, localizacaoImovel, tamanhoTerrenoImovel, tamanhoAreaConstImovel, qtdQuartosImovel, qtdBanheirosImovel, valorImovel, destaqueImovel, eDisponivel) {
-        this.idImovel = idImovel;
-        this.tituloImovel = tituloImovel;
-        this.descricaoImovel = descricaoImovel;
-        this.localizacaoImovel = localizacaoImovel;
-        this.tamanhoTerrenoImovel = tamanhoTerrenoImovel;
-        this.tamanhoAreaConstImovel = tamanhoAreaConstImovel;
-        this.qtdQuartosImovel = qtdQuartosImovel;
-        this.qtdBanheirosImovel = qtdBanheirosImovel;
-        this.valorImovel = valorImovel;
-        this.destaqueImovel = destaqueImovel;
-        this.eDisponivel = eDisponivel;
+
+    constructor () {
+        this.id = id;
+        this.categoria = categoria; ///planta, terceiros...
+        this.titulo = titulo;
+        this.slogan = slogan;
+        this.localizacao = localizacao;
+        this.valor = valor;
+        this.tipo = tipo;
+        this.descricao = descricao;
+        this.metragem = metragem;
+        this.tamanhoAreaConst = tamanhoAreaConst;
+        this.qtdQuartos = qtdQuartos;
+        this.qtdBanheiros = qtdBanheiros;
+        this.fotos = fotos;
     };
 }

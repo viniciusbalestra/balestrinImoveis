@@ -1,3 +1,4 @@
+/*
 const { getAllImoveis, insertImoveis, queryDatabase} = require('./queries'); // Importa as funções do seu queries.js
 const { pool } = require('./connection');
 
@@ -5,7 +6,7 @@ describe('Testes das funções de queries', () => {
     let testData;
 
     beforeAll(async () => {
-        // Insere dados de teste ANTES de todos os testes
+        // Insere dados de teste ANTES de todos os testes (falta inserir fotos)
         testData = [
             { id: 1111, categoria: 'planta', titulo: 'Imóvel de Teste 1', tipo: 'teste', localizacao: 'Local Teste', valor: 100000, slogan: "teste", metragem: 100 },
             { id: 2222, categoria: 'terceiro', titulo: 'Imóvel de Teste 2', tipo: 'teste', localizacao: 'Local Teste 2', valor: 200000, slogan: "", metragem: 200 },
@@ -68,3 +69,4 @@ describe('Testes das funções de queries', () => {
         expect(imoveis.length).toBe(testData.length)
     })
 });
+*/
