@@ -13,7 +13,7 @@ $bg-color: #eeeeee !default;
 
 .menu-link {
     text-decoration: none;
-    color: var(--cor-secundaria);
+    color: var(--cor-branco);
     font-family: var(--fonte-secundaria);
     padding: 0.5rem;
     position: relative;
@@ -21,7 +21,7 @@ $bg-color: #eeeeee !default;
 }
 
 .menu-link:hover {
-    color: var(--cor-branco);
+    color: var(--cor-secundaria);
 }
 
 .menu-link:hover,
@@ -36,7 +36,7 @@ $bg-color: #eeeeee !default;
     left: 50%;
     width: 0; /* Largura das bordas */
     height: 1px; /* Espessura das bordas */
-    background-color: var(--cor-branco);
+    background-color: var(--cor-secundaria);
     opacity: 0; /* Inicialmente invisíveis */
     transition: width 0.6s ease, opacity 0.6s ease, left 0.6s ease; /* Transições suaves */
 }

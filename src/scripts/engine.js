@@ -38,8 +38,8 @@ function imoveisToHtml(imovel) {
                 <span id="investimento-photo">
                     <img src="/src/assets/background/olympus.png" alt="foto do investimento">
                 </span>
-                <h3 class="investimento-titulo">${imovel.titulo}</h3>
                 <p class="investimento-descricao">${imovel.slogan}</p>
+                <h3 class="investimento-titulo">${imovel.titulo}</h3>
             </div>
             <div class="investimento-info investimento-info-2">
                 <div class="detail detail-1">

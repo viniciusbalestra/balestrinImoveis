@@ -1,5 +1,6 @@
 @import url(/src/styles/reset.css);
 @import url(/src/styles/buttons.css);
+@import url(/src/styles/investimentos.css);
 
 :root {
     /* Cores */
@@ -26,7 +27,7 @@ body {
 .menu {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     gap: 3.125rem;
     background-color: var(--cor-primaria);
@@ -43,7 +44,7 @@ body {
 }
 
 main {
-    background-color:#ebeaea;
+    background-color:#f7f7f7;
 }
 
 #main-escuro {
@@ -264,22 +265,23 @@ h2 {
 }
 
 .investimento-info h3 {
-    font-size: 18px;
+    font-size: 24px;
     font-family: var(--fonte-secundaria);
-    padding: 0.3rem 0.8rem;
+    padding: 0rem 0.8rem;
 }
 
 .investimento-descricao {
-    font-size: 14px;
+    font-size: 12px;
     font-family: var(--fonte-secundaria);
-    padding: 0.2rem 0.8rem;
+    padding: 0.2rem 0.8rem 0;
 }
 
 .investimento-info-2{
     text-align: center;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    padding: 0.4rem;
+    padding: 0rem 0.4rem;
+    height: 3rem;
 }
 
 .detail-1 {

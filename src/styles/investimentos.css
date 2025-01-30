@@ -1,0 +1,98 @@
+@import url(/src/styles/style.css);
+@import url(/src/styles/reset.css);
+
+main {
+    display: grid;
+}
+
+#investimentos-menu {
+    grid-column-start: 1;
+    grid-row-start: 2;
+    width: 15rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    color: var(--cor-texto);
+}
+
+#investimentos-menu-titulo {
+    font-family: var(--fonte-principal);
+    letter-spacing: 1.5px;
+    font-size: 22px;
+    font-weight: bold;
+    padding-bottom: 1rem;
+}
+
+.botao-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 4px;
+}
+
+.botoes {
+    -webkit-appearance: none; /* Remove estilos padrão no Safari */
+    -moz-appearance: none; /* Remove estilos padrão no Firefox */
+    appearance: none;
+    width: 1.2rem;
+    height: 1.2rem;
+    background-color: transparent;
+    border: var(--cor-texto) 1px solid;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.botoes:checked {
+    background-color: var(--cor-texto); /* Exemplo de cor */
+}
+
+#botao-container-terceiros {
+    padding-bottom: 1rem;
+    border-bottom: solid .5px var(--cor-texto) ;
+}
+
+#pagina-investimentos-titulo {
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-family: var(--fonte-principal);
+    font-weight: bolder;
+    font-size: 28px;
+    text-align: left;
+    color: var(--cor-primaria);
+    grid-column-start: 2;
+    grid-row-start: 1;
+    padding: 2rem 0 0 2rem;
+}
+
+#pagina-investimentos {
+    height: auto;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: .8rem;
+    height: max-content;
+    width: auto;
+    padding: 2rem 2rem 2rem 2rem;
+    grid-column-start: 2;
+}
+
+.pagina-investimento {
+    background-color: var(--cor-branco);
+    max-height: 500px;
+    height: 20.8rem;
+    width: 14.4rem;
+    box-shadow: -2px 2px 5px var(--cor-texto);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    color: var(--cor-texto);
+}
+
+#pagina-investimento-photo {
+    display: flex;
+    justify-content: center;
+}
+
+#pagina-investimento-photo img {
+    max-width: 14.4rem;
+    height: auto;
+} 
