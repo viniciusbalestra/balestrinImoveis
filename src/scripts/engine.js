@@ -1,4 +1,5 @@
 const investimentos = document.getElementById('investimentos');
+const imoveisDestaqueSelecionados = [];
 
 /*
 Features:
@@ -38,13 +39,15 @@ function imoveisToHtml(imovel) {
                 <span id="investimento-photo">
                     <img src="/src/assets/background/olympus.png" alt="foto do investimento">
                 </span>
-                <p class="investimento-descricao">${imovel.slogan}</p>
-                <h3 class="investimento-titulo">${imovel.titulo}</h3>
-            </div>
-            <div class="investimento-info investimento-info-2">
-                <div class="detail detail-1">
-                    <img src="" alt="">
-                    <p>${imovel.localizacao}</p>
+                <div class="investimento-info">
+                    <div>
+                        <div class="detail detail-1">
+                            <img src="/src/assets/interativo/icons8-mapa-24.png" alt="icone-mapa">
+                            <p>${imovel.localizacao}</p>
+                        </div>
+                    </div>
+                    <h3 class="investimento-titulo">${imovel.titulo}</h3>
+                    <p class="investimento-descricao">${imovel.slogan}</p>
                 </div>
             </div>
         </div>
@@ -74,7 +77,13 @@ async function pushImoveisDestaque() {
             return;
         };
 
-        const imoveisHtml = imoveisDestaque.map(imoveisToHtml).join('');
+        for (let i = 0; i < 4; i++) {
+            const iImoveis = imoveisDestaque[i];
+
+            imoveisDestaqueSelecionados.push(iImoveis);
+        };
+
+        const imoveisHtml = imoveisDestaqueSelecionados.map(imoveisToHtml).join('');
         console.log(imoveisHtml); //concatenação dos imoveis destaque em html
 
         if (investimentos) {
