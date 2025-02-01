@@ -68,7 +68,8 @@ main {
     height: auto;
     display: grid;
     grid-template-columns: auto auto auto auto;
-    gap: .8rem;
+    column-gap: .8rem;
+    row-gap: 2rem;
     height: max-content;
     width: auto;
     padding: 2rem 2rem 2rem 2rem;

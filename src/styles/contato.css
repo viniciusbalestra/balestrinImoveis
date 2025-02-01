@@ -1,0 +1,75 @@
+@import url(/src/styles/style.css);
+
+#main-escuro {
+    background-color: var(--cor-branco);
+    height: 75vh;
+}
+
+#pagina-contato {
+    display: flex;
+    margin: auto;
+    gap: 4rem;
+    height: fit-content;
+}
+
+#pagina-contato-informacoes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 4rem;
+    gap: 1.5rem;
+    text-decoration: none;
+    color: var(--cor-texto);
+}
+
+#pagina-contato-informacoes p {
+    font-size: 18px;
+    font-family: var(--fonte-secundaria);
+}
+
+#pagina-contato-informacoes h3 {
+    text-transform: uppercase;
+    font-size: 24px;
+    letter-spacing: 1px;
+}
+
+.link-pagina-contato {
+    color: var(--cor-secundaria);
+}
+
+.link-pagina-contato:hover {
+    color: #bba993;
+}
+
+fieldset {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border: none;
+    font-family: var(--fonte-alternativa);
+}
+
+.formulario {
+    background-color: #fcfbfb;
+    border: solid 1px transparent;
+    border-bottom: solid 1px var(--cor-cinza);
+    width: 25rem;
+    height: 2.7rem;
+    font-size: 14px;
+}
+
+#formulario-submit {
+    border: 1px solid var(--cor-cinza);
+    height: 2.4rem;
+    width: 25rem;
+    border-radius: 3px;
+    background-color: var(--cor-cinza);
+    color: var(--cor-texto);
+    font-size: 18px;
+    font-family: var(--fonte-alternativa);
+    cursor: pointer;
+}
+
+#formulario-submit:hover {
+    background-color: #cecece;
+}
