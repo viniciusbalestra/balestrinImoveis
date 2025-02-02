@@ -25,6 +25,8 @@
 #pagina-contato-informacoes p {
     font-size: 18px;
     font-family: var(--fonte-secundaria);
+    font-weight: 600;
+    letter-spacing: .5px;
 }
 
 #pagina-contato-informacoes h3 {
@@ -34,7 +36,9 @@
 }
 
 .link-pagina-contato {
-    color: var(--cor-secundaria);
+    color: var(--cor-primaria);
+    font-family: var(--fonte-secundaria);
+    font-weight: 700;
 }
 
 .link-pagina-contato:hover {
@@ -50,7 +54,7 @@ fieldset {
 }
 
 .formulario {
-    background-color: #fcfbfb;
+    background-color: #ffffff;
     border: solid 1px transparent;
     border-bottom: solid 1px var(--cor-cinza);
     width: 25rem;
