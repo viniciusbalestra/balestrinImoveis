@@ -23,7 +23,7 @@ async function getAllImoveis(categoria) {
 async function main() {
     try {
         const imoveisPlanta = await getAllImoveis('planta');
-        const imoveisTerceiros = await getAllImoveis('terceiro');
+        const imoveisTerceiros = await getAllImoveis('terceiros');
 
         console.log("Imóveis na planta:", imoveisPlanta);
         console.log("Imóveis de terceiros:", imoveisTerceiros);

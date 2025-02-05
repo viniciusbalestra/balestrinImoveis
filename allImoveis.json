@@ -11,17 +11,6 @@
     "fotos": null
   },
   {
-    "id": 2222,
-    "categoria": "planta",
-    "titulo": "Apartamento no Centro",
-    "slogan": "O que você merece",
-    "localizacao": "Rua Principal, 123",
-    "valor": null,
-    "tipo": null,
-    "metragem": null,
-    "fotos": null
-  },
-  {
     "id": 3333,
     "categoria": "planta",
     "titulo": "Casa com Piscina",
@@ -46,9 +35,20 @@
   {
     "id": 5555,
     "categoria": "planta",
-    "titulo": "Casa na praia isolada",
+    "titulo": "Predio alto",
+    "slogan": "Vem morar aqui",
+    "localizacao": "Rua dois, 27",
+    "valor": null,
+    "tipo": null,
+    "metragem": null,
+    "fotos": null
+  },
+  {
+    "id": 2222,
+    "categoria": "terceiros",
+    "titulo": "Apartamento no Centro",
     "slogan": "O que você merece",
-    "localizacao": "Alameda das aves, 246",
+    "localizacao": "Rua Principal, 123",
     "valor": null,
     "tipo": null,
     "metragem": null,
