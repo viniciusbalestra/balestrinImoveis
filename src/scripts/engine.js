@@ -1,4 +1,5 @@
 const investimentos = document.getElementById('investimentos');
+const imoveisTerceiros = document.getElementById('imoveis-terceiros')
 const paginaInvestimentos = document.getElementById('pagina-investimentos')
 const imoveisDestaqueSelecionados = [];
 
@@ -84,6 +85,28 @@ function imoveisDestaqueToHtml(imovel) {
     `;
 };
 
+function imoveisTerceirosToHtml(imovel) {
+    return `
+        <div class="investimento">
+            <div class="investimento-info">
+                <span id="investimento-photo">
+                    <img src="/src/assets/background/olympus.png" alt="foto do investimento">
+                </span>
+                <div class="investimento-info">
+                    <div>
+                        <div class="detail detail-1">
+                            <img src="/src/assets/interativo/icons8-mapa-24.png" alt="icone-mapa">
+                            <p>${imovel.localizacao}</p>
+                        </div>
+                    </div>
+                    <h3 class="investimento-titulo">${imovel.titulo}</h3>
+                    <p class="investimento-descricao">${imovel.slogan}</p>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
 function allImoveisToHtml(imovel) {
    return `
         <div class="pagina-investimento">
@@ -106,7 +129,7 @@ function allImoveisToHtml(imovel) {
         `
 }
 
-///Alimenta a pagina com a array imoveisDestaqueArray
+//Exibe os imóveis em destaque na planta na página inicial
 async function pushImoveisDestaque() {
     try {
         const imoveis = await requisiçãoImoveis();
@@ -146,6 +169,47 @@ async function pushImoveisDestaque() {
     };
 }
 
+
+async function pushImoveisDestaqueTerceiros() {
+    try {
+        const imoveis = await requisiçãoImoveis();
+        
+        const imoveisDestaqueTerceiros = await filtragemDeImoveis(imoveis, 'terceiros');
+        console.log(imoveisDestaqueTerceiros);
+
+        if (imoveisDestaqueTerceiros && imoveisDestaqueTerceiros.length > 0) {
+            // Iterar sobre imoveisDestaqueTerceiros
+            if (imoveisDestaqueTerceiros.length >= 4) {
+                for (let i = 0; i < 4; i++) {
+                    const iImoveisTerceiros = imoveisDestaqueTerceiros[i];
+                    imoveisDestaqueSelecionados.push(iImoveisTerceiros);
+                    console.log(imoveisDestaqueSelecionados);
+                };
+            } else {
+                console.log("Não há imóveis necessários");
+            };
+        } else {
+            console.log("Nenhum imóvel do tipo planta encontrado.");
+            
+        };
+
+        const imoveisHtml = imoveisDestaqueSelecionados.map(imoveisDestaqueToHtml).join('');
+        console.log(imoveisHtml); //concatenação dos imoveis destaque em html
+
+        if (imoveisTerceiros) {
+            imoveisTerceiros.innerHTML = imoveisHtml;
+        } else {
+            console.error('Elemento ID "investimentos" não encontrado.')
+        };
+    } catch (error) {
+        console.error("Erro ao processar imóveis em destaque:", error);
+        if (imoveisTerceiros) {
+            imoveisTerceiros.innerHTML = "<p>Ocorreu um erro ao carregar os imóveis.</p>";
+        };
+    };
+}
+
+//Exibe todos os imóveis na página de investimentos
 async function pushAllImoveis() {
     try {
         const imoveis = await requisiçãoImoveis();
@@ -168,7 +232,7 @@ async function pushAllImoveis() {
         if (paginaInvestimentos) {
             paginaInvestimentos.innerHTML = imoveisHtml;
         } else {
-            console.error('Elemento ID "investimentos" não encontrado.')
+            console.error('Elemento ID "pagina-investimentos" não encontrado.')
         };
 
     } catch (error) {
@@ -179,5 +243,6 @@ async function pushAllImoveis() {
     };
 }
 
-pushAllImoveis();
 pushImoveisDestaque();
+pushImoveisDestaqueTerceiros();
+pushAllImoveis();

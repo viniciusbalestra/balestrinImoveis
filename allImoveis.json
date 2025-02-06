@@ -53,5 +53,38 @@
     "tipo": null,
     "metragem": null,
     "fotos": null
+  },
+  {
+    "id": 6666,
+    "categoria": "terceiros",
+    "titulo": "Apartamento rústico",
+    "slogan": "Conheça a simplicidade",
+    "localizacao": "Rua pereira, 102",
+    "valor": null,
+    "tipo": null,
+    "metragem": null,
+    "fotos": null
+  },
+  {
+    "id": 7777,
+    "categoria": "terceiros",
+    "titulo": "Casa no lago",
+    "slogan": "Traz a sunga",
+    "localizacao": "Rua do lago, 42",
+    "valor": null,
+    "tipo": null,
+    "metragem": null,
+    "fotos": null
+  },
+  {
+    "id": 8888,
+    "categoria": "terceiros",
+    "titulo": "Sobrado antigo",
+    "slogan": "Panela velha",
+    "localizacao": "Rua afonso, 452",
+    "valor": null,
+    "tipo": null,
+    "metragem": null,
+    "fotos": null
   }
 ]
