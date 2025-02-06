@@ -1,7 +1,8 @@
-const investimentos = document.getElementById('investimentos');
-const imoveisTerceiros = document.getElementById('imoveis-terceiros')
+const imoveisPlantaId = document.getElementById('investimentos');
+const imoveisTerceirosId = document.getElementById('imoveis-terceiros')
 const paginaInvestimentos = document.getElementById('pagina-investimentos')
-const imoveisDestaqueSelecionados = [];
+const imoveisPlantaArray = [];
+const imoveisTerceirosArray = [];
 
 /*
 Features:
@@ -49,8 +50,8 @@ async function requisiçãoImoveis() {
     if (!imoveis || imoveis.length === 0) {
         console.log('Nenhum imóvel em destaque para exibir.');
 
-        if (investimentos) {
-            investimentos.innerHTML = "<p>Nenhum imóvel em destaque encontrado.</p>";
+        if (imoveisPlantaId) {
+            imoveisPlantaId.innerHTML = "<p>Nenhum imóvel em destaque encontrado.</p>";
         };
             
         return;
@@ -130,20 +131,20 @@ function allImoveisToHtml(imovel) {
 }
 
 //Exibe os imóveis em destaque na planta na página inicial
-async function pushImoveisDestaque() {
+async function pushImoveisDestaquePlanta() {
     try {
         const imoveis = await requisiçãoImoveis();
         
-        const imoveisDestaquePlanta = await filtragemDeImoveis(imoveis, 'planta');
-        console.log(imoveisDestaquePlanta);
+        const imoveisPlanta = await filtragemDeImoveis(imoveis, 'planta');
+        console.log(imoveisPlanta);
 
-        if (imoveisDestaquePlanta && imoveisDestaquePlanta.length > 0) {
-            // Iterar sobre imoveisDestaquePlanta
-            if (imoveisDestaquePlanta.length >= 4) {
+        if (imoveisPlanta && imoveisPlanta.length > 0) {
+            // Iterar sobre imoveisPlanta
+            if (imoveisPlanta.length >= 4) {
                 for (let i = 0; i < 4; i++) {
-                    const iImoveis = imoveisDestaquePlanta[i];
-                    imoveisDestaqueSelecionados.push(iImoveis);
-                    console.log(imoveisDestaqueSelecionados);
+                    const iImoveis = imoveisPlanta[i];
+                    imoveisPlantaArray.push(iImoveis);
+                    console.log(imoveisPlantaArray);
                 };
             } else {
                 console.log("Não há imóveis necessários");
@@ -153,38 +154,39 @@ async function pushImoveisDestaque() {
             
         };
 
-        const imoveisHtml = imoveisDestaqueSelecionados.map(imoveisDestaqueToHtml).join('');
+        const imoveisHtml = imoveisPlantaArray.map(imoveisDestaqueToHtml).join('');
         console.log(imoveisHtml); //concatenação dos imoveis destaque em html
 
-        if (investimentos) {
-            investimentos.innerHTML = imoveisHtml;
+        if (imoveisPlantaId) {
+            imoveisPlantaId.innerHTML = imoveisHtml;
         } else {
             console.error('Elemento ID "investimentos" não encontrado.')
         };
     } catch (error) {
         console.error("Erro ao processar imóveis em destaque:", error);
-        if (investimentos) {
-            investimentos.innerHTML = "<p>Ocorreu um erro ao carregar os imóveis.</p>";
+        if (imoveisPlantaId) {
+            imoveisPlantaId.innerHTML = "<p>Ocorreu um erro ao carregar os imóveis.</p>";
         };
     };
 }
-
 
 async function pushImoveisDestaqueTerceiros() {
     try {
         const imoveis = await requisiçãoImoveis();
         
-        const imoveisDestaqueTerceiros = await filtragemDeImoveis(imoveis, 'terceiros');
-        console.log(imoveisDestaqueTerceiros);
+        const imoveisTerceiros = await filtragemDeImoveis(imoveis, 'terceiros');
+        console.log(imoveisTerceiros);
 
-        if (imoveisDestaqueTerceiros && imoveisDestaqueTerceiros.length > 0) {
-            // Iterar sobre imoveisDestaqueTerceiros
-            if (imoveisDestaqueTerceiros.length >= 4) {
+        if (imoveisTerceiros && imoveisTerceiros.length > 0) {
+            // Iterar sobre imoveisTerceiros
+            if (imoveisTerceiros.length >= 4) {
                 for (let i = 0; i < 4; i++) {
-                    const iImoveisTerceiros = imoveisDestaqueTerceiros[i];
-                    imoveisDestaqueSelecionados.push(iImoveisTerceiros);
-                    console.log(imoveisDestaqueSelecionados);
+                    const iImoveisTerceiros = imoveisTerceiros[i];
+                    imoveisTerceirosArray.push(iImoveisTerceiros);
+                    console.log(imoveisTerceirosArray);
                 };
+
+                console.log(imoveisTerceirosArray);
             } else {
                 console.log("Não há imóveis necessários");
             };
@@ -193,18 +195,18 @@ async function pushImoveisDestaqueTerceiros() {
             
         };
 
-        const imoveisHtml = imoveisDestaqueSelecionados.map(imoveisDestaqueToHtml).join('');
+        const imoveisHtml = imoveisTerceirosArray.map(imoveisTerceirosToHtml).join('');
         console.log(imoveisHtml); //concatenação dos imoveis destaque em html
 
-        if (imoveisTerceiros) {
-            imoveisTerceiros.innerHTML = imoveisHtml;
+        if (imoveisTerceirosId) {
+            imoveisTerceirosId.innerHTML = imoveisHtml;
         } else {
             console.error('Elemento ID "investimentos" não encontrado.')
         };
     } catch (error) {
         console.error("Erro ao processar imóveis em destaque:", error);
-        if (imoveisTerceiros) {
-            imoveisTerceiros.innerHTML = "<p>Ocorreu um erro ao carregar os imóveis.</p>";
+        if (imoveisTerceirosId) {
+            imoveisTerceirosId.innerHTML = "<p>Ocorreu um erro ao carregar os imóveis.</p>";
         };
     };
 }
@@ -243,6 +245,6 @@ async function pushAllImoveis() {
     };
 }
 
-pushImoveisDestaque();
+pushImoveisDestaquePlanta();
 pushImoveisDestaqueTerceiros();
 pushAllImoveis();
