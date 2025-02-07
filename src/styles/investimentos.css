@@ -86,6 +86,12 @@ main {
     display: flex;
     flex-direction: column;
     color: var(--cor-texto);
+    transition: transform 0.3s ease;
+}
+
+.pagina-investimento:hover {
+    cursor: pointer;
+    transform: scale(1.03);
 }
 
 #pagina-investimento-photo {

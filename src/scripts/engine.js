@@ -1,6 +1,6 @@
 const imoveisPlantaId = document.getElementById('investimentos');
 const imoveisTerceirosId = document.getElementById('imoveis-terceiros')
-const paginaInvestimentos = document.getElementById('pagina-investimentos')
+const paginaInvestimentosId = document.getElementById('pagina-investimentos')
 const imoveisPlantaArray = [];
 const imoveisTerceirosArray = [];
 
@@ -133,7 +133,15 @@ function allImoveisToHtml(imovel) {
 //Exibe os imóveis em destaque na planta na página inicial
 async function pushImoveisDestaquePlanta() {
     try {
+        // Exibe mensagem de carregamento
+        imoveisPlantaId.innerHTML = "<p>Carregando imóveis...</p>";
+
         const imoveis = await requisiçãoImoveis();
+ 
+        // Verifica se a requisição foi bem-sucedida
+        if (!imoveis) {
+            throw new Error("Erro na requisição de imóveis.");
+        }
         
         const imoveisPlanta = await filtragemDeImoveis(imoveis, 'planta');
         console.log(imoveisPlanta);
@@ -172,7 +180,15 @@ async function pushImoveisDestaquePlanta() {
 
 async function pushImoveisDestaqueTerceiros() {
     try {
+        // Exibe mensagem de carregamento
+        imoveisTerceirosId.innerHTML = "<p>Carregando imóveis...</p>";
+
         const imoveis = await requisiçãoImoveis();
+  
+        // Verifica se a requisição foi bem-sucedida
+        if (!imoveis) {
+            throw new Error("Erro na requisição de imóveis.");
+        }
         
         const imoveisTerceiros = await filtragemDeImoveis(imoveis, 'terceiros');
         console.log(imoveisTerceiros);
@@ -213,15 +229,23 @@ async function pushImoveisDestaqueTerceiros() {
 
 //Exibe todos os imóveis na página de investimentos
 async function pushAllImoveis() {
-    try {
+    try { 
+        // Exibe mensagem de carregamento
+        paginaInvestimentosId.innerHTML = "<p>Carregando imóveis...</p>";
+
         const imoveis = await requisiçãoImoveis();
         console.log(imoveis);
-
+ 
+        // Verifica se a requisição foi bem-sucedida
+        if (!imoveis) {
+            throw new Error("Erro na requisição de imóveis.");
+        }
+        
         if (!imoveis || imoveis.length === 0) {
             console.log("Nenhum imóvel encontrado.");
 
-            if (paginaInvestimentos) {
-                paginaInvestimentos.innerHTML = "<p>Nenhum imóvel encontrado.<p>";
+            if (paginaInvestimentosId) {
+                paginaInvestimentosId.innerHTML = "<p>Nenhum imóvel encontrado.<p>";
             }
 
             return;
@@ -231,16 +255,16 @@ async function pushAllImoveis() {
         let imoveisHtml = imoveis.map(allImoveisToHtml).join('');
         console.log(imoveisHtml); //concatenação dos imoveis destaque em html
             
-        if (paginaInvestimentos) {
-            paginaInvestimentos.innerHTML = imoveisHtml;
+        if (paginaInvestimentosId) {
+            paginaInvestimentosId.innerHTML = imoveisHtml;
         } else {
             console.error('Elemento ID "pagina-investimentos" não encontrado.')
         };
 
     } catch (error) {
         console.error('Erro ao carregar imóveis:', error);
-        if (paginaInvestimentos) {
-            paginaInvestimentos.innerHTML = "<p>Ocorreu um erro ao carregar os imóveis.</p>";
+        if (paginaInvestimentosId) {
+            paginaInvestimentosId.innerHTML = "<p>Ocorreu um erro ao carregar os imóveis.</p>";
         };
     };
 }

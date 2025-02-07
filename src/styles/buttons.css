@@ -10,7 +10,6 @@ $bg-color: #eeeeee !default;
 */
 
 /*Botões do menu*/
-
 .menu-link {
     text-decoration: none;
     color: var(--cor-branco);
@@ -58,7 +57,6 @@ $bg-color: #eeeeee !default;
 }
 
 /*Botões da página principal*/
-
 #home-buttons {
     display: flex;
     justify-content: center;
@@ -95,11 +93,95 @@ $bg-color: #eeeeee !default;
 }
 
 .home-button:hover {
-    color: var(--cor-branco); /* Cor do texto no hover*/
+    color: var(--cor-branco); /*Cor do texto no hover*/
 }
 
 .home-button:hover::before {
     transform: translateX(0);
+}
+
+/*Links de contato da seção ABOUT*/
+.about-address-links {
+    display: flex;
+    position: relative;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.about-address-links  a,
+.about-address-links  p {
+    color: var(--cor-texto);
+    font-family: var(--fonte-alternativa);
+}
+
+/*Efeito dos links*/
+.about-address-link:hover {
+    cursor: pointer;
+}
+
+.about-address-link:after,
+.about-address-link:before {
+    content: " ";
+    position: absolute;
+    left: 50%;
+    width: 0; /* Largura das bordas */
+    height: 1px; /* Espessura das bordas */
+    background-color: var(--cor-cinza);
+    opacity: 0; /* Inicialmente invisíveis */
+    transition: width 0.6s ease, opacity 0.6s ease, left 0.6s ease; /* Transições suaves */
+}
+
+.about-address-link::before {
+    top: 0;
+}
+
+.about-address-link::after {
+    bottom: 0;
+}
+
+#about-link-whatsapp {
+    grid-column-start: 1;
+}
+
+#whatsapp-link:hover::after {
+    width: 81%; /* Largura final */
+    opacity: 1; /* Tornam-se visíveis */
+    left: 20%; /* Ajusta a posição para centralizar durante o hover */
+}
+
+#about-link-instagram {
+    grid-column-start: 3;
+}
+
+#instagram-link:hover::after {
+    width: 86%; /* Largura final */
+    opacity: 1; /* Tornam-se visíveis */
+    left: 17%; /* Ajusta a posição para centralizar durante o hover */
+}
+
+
+#about-link-email {
+    grid-column-start: 2;
+    grid-row-start: 1;
+}
+
+#email-link:hover::after {
+    width: 90%; /* Largura final */
+    opacity: 1; /* Tornam-se visíveis */
+    left: 10.5%; /* Ajusta a posição para centralizar durante o hover */
+}
+
+
+#about-link-localizacao {
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+#about-link-creci {
+    text-transform: uppercase;
+    grid-column-start: 1;
+    grid-row-start: 2;
+    gap: 5px;
 }
 
   
