@@ -74,12 +74,14 @@ function imoveisDestaqueToHtml(imovel) {
                 <div class="investimento-info">
                     <div>
                         <div class="detail detail-1">
-                            <img src="/src/assets/interativo/icons8-mapa-24.png" alt="icone-mapa">
+                            <img src="/src/assets/interativo/icons8-localização-24.png" alt="icone-mapa">
                             <p>${imovel.localizacao}</p>
                         </div>
                     </div>
                     <h3 class="investimento-titulo">${imovel.titulo}</h3>
-                    <p class="investimento-descricao">${imovel.slogan}</p>
+                    <div class="investimento-descricao-container">
+                        <p class="investimento-descricao">"${imovel.slogan}"</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -96,12 +98,25 @@ function imoveisTerceirosToHtml(imovel) {
                 <div class="investimento-info">
                     <div>
                         <div class="detail detail-1">
-                            <img src="/src/assets/interativo/icons8-mapa-24.png" alt="icone-mapa">
+                            <img src="/src/assets/interativo/icons8-localização-24.png" alt="icone-mapa">
                             <p>${imovel.localizacao}</p>
                         </div>
                     </div>
                     <h3 class="investimento-titulo">${imovel.titulo}</h3>
-                    <p class="investimento-descricao">${imovel.slogan}</p>
+                    <div id="investimento-descricoes">
+                        <div class="investimento-descricao-container">
+                            <img src="/src/assets/interativo/icons8-cama-24.png" alt="Icone de quartos">
+                            <p class="investimento-descricao">4 quartos</p>
+                        </div>
+                        <div class="investimento-descricao-container">
+                            <img src="/src/assets/interativo/icons8-ruler-24.png" alt="Icone de régua">
+                            <p class="investimento-descricao">85m²</p>
+                        </div>
+                        <div class="investimento-descricao-container">
+                            <img src="/src/assets/interativo/icons8-garagem-24.png" alt="Icone de garagem">
+                            <p class="investimento-descricao">2 vagas</p>
+                        </div>            
+                    </div>    
                 </div>
             </div>
         </div>
@@ -118,7 +133,7 @@ function allImoveisToHtml(imovel) {
                 <div class="investimento-info">
                     <div>
                         <div class="detail detail-1">
-                            <img src="/src/assets/interativo/icons8-mapa-24.png" alt="icone-mapa">
+                            <img src="/src/assets/interativo/icons8-localização-24.png" alt="icone-mapa">
                             <p>${imovel.localizacao}</p>
                         </div>
                     </div>

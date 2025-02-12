@@ -106,7 +106,7 @@ h2 {
     font-weight: bolder;
     font-size: 28px;
     text-align: center;
-    color: var(--cor-primaria);
+    color: var(--cor-texto);
 }
 
 #about {
@@ -176,10 +176,6 @@ h2 {
     row-gap: 1rem;
 }
 
-#investimentos-titulo {
-    color: var(--cor-texto);
-}
-
 #investimentos,
 #imoveis-terceiros {
     height: 80vh;
@@ -222,26 +218,48 @@ h2 {
     display: flex;
     flex-direction: column;
     height: 26rem;
-    gap: .6rem;
+}
+
+.investimentos-titulo {
+    color: var(--cor-texto);
 }
 
 .investimento-info h3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 24px;
     font-family: var(--fonte-secundaria);
-    padding: 0.8rem;
+    padding: 0.6rem;
+    height: 5.5rem;
+    text-align: center;
 }
 
-/*Slogan na HomePage*/
+#investimento-descricoes{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.investimento-descricao-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.investimento-descricao-container img {
+    max-width: 25px;
+}
+
 .investimento-descricao {
     font-size: 14px;
     font-family: var(--fonte-secundaria);
-    padding: 0 0.8rem;
 }
 
 .detail {
     display: flex;
     align-items: center;
-    padding: 0 0.8rem;
+    padding: 0.7rem 0.8rem 0;
     gap: 5px;
 }
 
