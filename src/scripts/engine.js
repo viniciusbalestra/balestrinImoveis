@@ -65,22 +65,32 @@ async function filtragemDeImoveis (dados, categoria) {
 }
 
 function imoveisDestaqueToHtml(imovel) {
+    let divClass = "";
+
+    if (window.location.pathname === '/pages/investimentos.html') {
+        // Usuário está na página de investimentos
+        divClass = "pagina-investimento"
+    } else if (window.location.pathname === '/index.html') {
+        // Usuário está na home
+        divClass = "investimento"
+    };
+
     return `
-        <div class="investimento">
-            <div class="investimento-info">
-                <span id="investimento-photo">
+        <div class="${divClass}">
+            <div>
+                <span id="${divClass}-photo">
                     <img src="/src/assets/background/olympus.png" alt="foto do investimento">
                 </span>
-                <div class="investimento-info">
+                <div class="${divClass}-info">
                     <div>
                         <div class="detail detail-1">
                             <img src="/src/assets/interativo/icons8-localização-24.png" alt="icone-mapa">
                             <p>${imovel.localizacao}</p>
                         </div>
                     </div>
-                    <h3 class="investimento-titulo">${imovel.titulo}</h3>
-                    <div class="investimento-descricao-container">
-                        <p class="investimento-descricao">"${imovel.slogan}"</p>
+                    <h3 class="${divClass}-titulo">${imovel.titulo}</h3>
+                    <div class="${divClass}-descricao-container">
+                        <p class="${divClass}-descricao">"${imovel.slogan}"</p>
                     </div>
                 </div>
             </div>
@@ -89,20 +99,30 @@ function imoveisDestaqueToHtml(imovel) {
 };
 
 function imoveisTerceirosToHtml(imovel) {
+    let divClass = "";
+
+    if (window.location.pathname === '/pages/investimentos.html') {
+        // Usuário está na página de investimentos
+        divClass = "pagina-investimento"
+    } else if (window.location.pathname === '/index.html') {
+        // Usuário está na home
+        divClass = "investimento"
+    };
+
     return `
-        <div class="investimento">
-            <div class="investimento-info">
-                <span id="investimento-photo">
+        <div class="${divClass}">
+            <div>
+                <span id="${divClass}-photo">
                     <img src="/src/assets/background/olympus.png" alt="foto do investimento">
                 </span>
-                <div class="investimento-info">
+                <div class="${divClass}-info">
                     <div>
                         <div class="detail detail-1">
                             <img src="/src/assets/interativo/icons8-localização-24.png" alt="icone-mapa">
                             <p>${imovel.localizacao}</p>
                         </div>
                     </div>
-                    <h3 class="investimento-titulo">${imovel.titulo}</h3>
+                    <h3 class="${divClass}-titulo">${imovel.titulo}</h3>
                     <div id="investimento-descricoes">
                         <div class="investimento-descricao-container">
                             <img src="/src/assets/interativo/icons8-cama-24.png" alt="Icone de quartos">
@@ -121,28 +141,6 @@ function imoveisTerceirosToHtml(imovel) {
             </div>
         </div>
     `;
-}
-
-function allImoveisToHtml(imovel) {
-   return `
-        <div class="pagina-investimento">
-            <div class="investimento-info">
-                <span id="pagina-investimento-photo">
-                    <img src="/src/assets/background/olympus.png" alt="foto do investimento">
-                </span>
-                <div class="investimento-info">
-                    <div>
-                        <div class="detail detail-1">
-                            <img src="/src/assets/interativo/icons8-localização-24.png" alt="icone-mapa">
-                            <p>${imovel.localizacao}</p>
-                        </div>
-                    </div>
-                    <h3 class="investimento-titulo">${imovel.titulo}</h3>
-                    <p class="investimento-descricao">${imovel.slogan}</p>
-                </div>
-            </div>
-        </div>
-        `
 }
 
 //Exibe os imóveis em destaque na planta na página inicial
@@ -264,17 +262,27 @@ async function pushAllImoveis() {
             }
 
             return;
-
         }
+
+        try {
+            const imoveisTerceiros = await filtragemDeImoveis(imoveis, 'terceiros');
+            const imoveisPlanta = await filtragemDeImoveis(imoveis, 'planta');
+
+            let imoveisHtmlTerceiros = imoveisTerceiros.map(imoveisTerceirosToHtml).join('');
+            let imoveisHtmlPlanta = imoveisPlanta.map(imoveisDestaqueToHtml).join('');
             
-        let imoveisHtml = imoveis.map(allImoveisToHtml).join('');
-        console.log(imoveisHtml); //concatenação dos imoveis destaque em html
-            
-        if (paginaInvestimentosId) {
-            paginaInvestimentosId.innerHTML = imoveisHtml;
-        } else {
-            console.error('Elemento ID "pagina-investimentos" não encontrado.')
-        };
+            const imoveisHtml = [imoveisHtmlPlanta, imoveisHtmlTerceiros];
+
+            if (paginaInvestimentosId) {
+                paginaInvestimentosId.innerHTML = imoveisHtml;
+            } else {
+                console.error('Elemento ID "pagina-investimentos" não encontrado.')
+            };
+
+        } catch {
+            console.error("Não foi possível filtrar imóveis, erro:", erro);
+        }
+        
 
     } catch (error) {
         console.error('Erro ao carregar imóveis:', error);
