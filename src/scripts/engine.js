@@ -144,6 +144,7 @@ function imoveisTerceirosToHtml(imovel) {
     `;
 }
 
+
 //Exibe os imóveis em destaque na planta na página inicial
 async function pushImoveisDestaquePlanta() {
     try {
