@@ -127,15 +127,15 @@ function imoveisTerceirosToHtml(imovel) {
                     <div id="investimento-descricoes">
                         <div class="${divClass}-descricao-container">
                             <img src="/src/assets/interativo/icons8-cama-24.png" alt="Icone de quartos">
-                            <p class="${divClass}-descricao">${imovel.qtdQuartos}</p>
+                            <p class="${divClass}-descricao">${imovel.qtdQuartos}quartos</p>
                         </div>
                         <div class="${divClass}-descricao-container">
                             <img src="/src/assets/interativo/icons8-ruler-24.png" alt="Icone de régua">
-                            <p class="${divClass}-descricao">${imovel.metragem}</p>
+                            <p class="${divClass}-descricao">${imovel.metragem}m² totais</p>
                         </div>
                         <div class="${divClass}-descricao-container">
                             <img src="/src/assets/interativo/icons8-garagem-24.png" alt="Icone de garagem">
-                            <p class="${divClass}-descricao">${imovel.vagas}</p>
+                            <p class="${divClass}-descricao">${imovel.vagas}vagas</p>
                         </div>            
                     </div>    
                 </div>

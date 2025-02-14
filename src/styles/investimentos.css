@@ -51,28 +51,16 @@ main {
     border-bottom: solid .5px var(--cor-texto) ;
 }
 
-#pagina-investimentos-titulo {
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    font-family: var(--fonte-principal);
-    font-weight: bolder;
-    font-size: 28px;
-    text-align: left;
-    color: var(--cor-primaria);
-    grid-column-start: 2;
-    grid-row-start: 1;
-    padding: 2rem 0 0 2rem;
-}
-
 #pagina-investimentos {
     height: auto;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    column-gap: .8rem;
+    column-gap: 1.5rem;
     row-gap: 2rem;
     height: fit-content;
-    width: auto;
-    padding: 2rem 2rem 2rem 2rem;
+    width: fit-content;
+    padding: 0 0 2rem;
+    margin: 0 auto;
     grid-column-start: 2;
 }
 
@@ -87,6 +75,23 @@ main {
     flex-direction: column;
     color: var(--cor-texto);
     transition: transform 0.3s ease;
+}
+
+#pagina-investimentos-titulo {
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    width: 94.5%;
+    font-family: var(--fonte-principal);
+    font-weight: bolder;
+    font-size: 28px;
+    text-align: center;
+    color: var(--cor-primaria);
+    grid-column-start: 2;
+    grid-row-start: 1;
+    padding: 1rem;
+    margin: 1rem auto;
+    background-color: var(--cor-branco);
+    border: solid 1px var(--cor-cinza);
 }
 
 .pagina-investimento:hover {
