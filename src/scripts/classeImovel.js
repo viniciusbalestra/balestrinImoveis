@@ -10,6 +10,7 @@ class Imovel {
     metragem;
     tamanhoAreaConst;
     qtdQuartos;
+    vagas;
     qtdBanheiros;
     destaque = false;
     eDisponivel = false;
@@ -28,7 +29,10 @@ class Imovel {
         this.metragem = metragem;
         this.tamanhoAreaConst = tamanhoAreaConst;
         this.qtdQuartos = qtdQuartos;
+        this.vagas = vagas;
         this.qtdBanheiros = qtdBanheiros;
         this.fotos = fotos;
     };
 }
+
+module.exports = Imovel;

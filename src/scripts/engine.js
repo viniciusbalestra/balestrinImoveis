@@ -3,6 +3,7 @@ const imoveisTerceirosId = document.getElementById('imoveis-terceiros')
 const paginaInvestimentosId = document.getElementById('pagina-investimentos')
 const imoveisPlantaArray = [];
 const imoveisTerceirosArray = [];
+const queries = fetch('/queries.js');
 
 /*
 Features:
@@ -124,17 +125,17 @@ function imoveisTerceirosToHtml(imovel) {
                     </div>
                     <h3 class="${divClass}-titulo">${imovel.titulo}</h3>
                     <div id="investimento-descricoes">
-                        <div class="investimento-descricao-container">
+                        <div class="${divClass}-descricao-container">
                             <img src="/src/assets/interativo/icons8-cama-24.png" alt="Icone de quartos">
-                            <p class="investimento-descricao">4 quartos</p>
+                            <p class="${divClass}-descricao">${imovel.qtdQuartos}</p>
                         </div>
-                        <div class="investimento-descricao-container">
+                        <div class="${divClass}-descricao-container">
                             <img src="/src/assets/interativo/icons8-ruler-24.png" alt="Icone de régua">
-                            <p class="investimento-descricao">85m²</p>
+                            <p class="${divClass}-descricao">${imovel.metragem}</p>
                         </div>
-                        <div class="investimento-descricao-container">
+                        <div class="${divClass}-descricao-container">
                             <img src="/src/assets/interativo/icons8-garagem-24.png" alt="Icone de garagem">
-                            <p class="investimento-descricao">2 vagas</p>
+                            <p class="${divClass}-descricao">${imovel.vagas}</p>
                         </div>            
                     </div>    
                 </div>
@@ -271,7 +272,7 @@ async function pushAllImoveis() {
             let imoveisHtmlTerceiros = imoveisTerceiros.map(imoveisTerceirosToHtml).join('');
             let imoveisHtmlPlanta = imoveisPlanta.map(imoveisDestaqueToHtml).join('');
             
-            const imoveisHtml = [imoveisHtmlPlanta, imoveisHtmlTerceiros];
+            const imoveisHtml = imoveisHtmlPlanta.concat(imoveisHtmlTerceiros);
 
             if (paginaInvestimentosId) {
                 paginaInvestimentosId.innerHTML = imoveisHtml;
@@ -292,6 +293,11 @@ async function pushAllImoveis() {
     };
 }
 
-pushImoveisDestaquePlanta();
-pushImoveisDestaqueTerceiros();
-pushAllImoveis();
+function main() {
+    pushImoveisDestaquePlanta();
+    pushImoveisDestaqueTerceiros();
+    pushAllImoveis();
+};
+
+main();
+
