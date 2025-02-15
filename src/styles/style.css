@@ -10,7 +10,7 @@
     --cor-branco: #f8f9fa; /* Branco*/
     --cor-texto: #333; /* Cinza escuro */
     --cor-destaque: #42427E; /*Azul claro*/
-    --cor-escura: #292308; /*Marrom escuro*/
+    --cor-escura: #1b1b1b; /*Marrom escuro*/
     --cor-cinza: #dddddd;
 
   
@@ -220,16 +220,13 @@ h2 {
     height: 26rem;
 }
 
-.investimentos-titulo {
-    color: var(--cor-texto);
-}
-
 .investimento-info h3 {
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 24px;
     font-family: var(--fonte-secundaria);
+    color: var(--cor-escura);
     padding: 0.6rem;
     height: 5.5rem;
     text-align: center;

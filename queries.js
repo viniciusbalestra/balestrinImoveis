@@ -2,7 +2,7 @@
 const { connect, pool } = require('./connection');
 const fs = require('fs/promises');
 const path = require('path');
-const Imovel = require('./src/scripts/classeImovel')
+const Imovel = require('./src/scripts/classeImovel');
 
 const jsonFilePath = path.join(__dirname, 'allImoveis.json');
 
@@ -12,24 +12,28 @@ async function getAllImoveis(categoria) {
         const [rows] = await pool.execute('SELECT * FROM imoveis WHERE categoria = ?', [categoria]);
 
         const imoveis = rows.map(row => {
-            const imovel = new Imovel();
-            imovel.id = row.id;
-            imovel.categoria = row.categoria;
-            imovel.titulo = row.titulo;
-            imovel.slogan = row.slogan;
-            imovel.localizacao = row.localizacao;
-            imovel.valor = row.valor;
-            imovel.tipo = row.tipo;
-            imovel.descricao = row.descricao;
-            imovel.metragem = row.metragem;
-            imovel.tamanhoAreaConst = row.tamanhoAreaConst;
-            imovel.qtdQuartos = row.qtdQuartos;
-            imovel.vagas = row.vagas;
-            imovel.qtdBanheiros = row.qtdBanheiros;
-            imovel.fotos = row.fotos;
+            const imovel = new Imovel(
+                row.id,
+                row.categoria,
+                row.titulo,
+                row.slogan,
+                row.localizacao,
+                row.valor,
+                row.tipo,
+                row.descricao,
+                row.metragem,
+                row.tamanhoAreaConst,
+                row.qtdQuartos,
+                row.vagas,
+                row.qtdBanheiros,
+                row.fotos
+            );
+            
+            console.log(imovel, "1");
             return imovel;
         });
 
+        console.log(imoveis, "2");
         return imoveis;
 
     } catch (error) {
@@ -147,6 +151,7 @@ async function queryDatabase() {
         return null
     }
 }
+
 queryDatabase();
 
 module.exports = { getAllImoveis, insertImoveis, queryDatabase, getAllImoveisFromJson, queries };

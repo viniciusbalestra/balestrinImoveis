@@ -7,8 +7,15 @@
     "localizacao": "Rua: Primeira 478, Norteimoveis",
     "valor": null,
     "tipo": null,
-    "metragem": null,
-    "fotos": null
+    "descricao": null,
+    "metragem": 80,
+    "tamanhoAreaConst": null,
+    "qtdQuartos": 2,
+    "vagas": 2,
+    "qtdBanheiros": null,
+    "fotos": null,
+    "destaque": false,
+    "eDisponivel": false
   },
   {
     "id": 3333,
@@ -18,8 +25,15 @@
     "localizacao": "Avenida das Flores, 456",
     "valor": null,
     "tipo": null,
-    "metragem": null,
-    "fotos": null
+    "descricao": null,
+    "metragem": 60,
+    "tamanhoAreaConst": null,
+    "qtdQuartos": 1,
+    "vagas": 1,
+    "qtdBanheiros": null,
+    "fotos": null,
+    "destaque": false,
+    "eDisponivel": false
   },
   {
     "id": 4444,
@@ -29,8 +43,15 @@
     "localizacao": "Alameda dos Pássaros, 789",
     "valor": null,
     "tipo": null,
-    "metragem": null,
-    "fotos": null
+    "descricao": null,
+    "metragem": 97,
+    "tamanhoAreaConst": null,
+    "qtdQuartos": 2,
+    "vagas": 2,
+    "qtdBanheiros": null,
+    "fotos": null,
+    "destaque": false,
+    "eDisponivel": false
   },
   {
     "id": 5555,
@@ -40,8 +61,15 @@
     "localizacao": "Rua dois, 27",
     "valor": null,
     "tipo": null,
-    "metragem": null,
-    "fotos": null
+    "descricao": null,
+    "metragem": 180,
+    "tamanhoAreaConst": null,
+    "qtdQuartos": 5,
+    "vagas": 4,
+    "qtdBanheiros": null,
+    "fotos": null,
+    "destaque": false,
+    "eDisponivel": false
   },
   {
     "id": 2222,
@@ -51,8 +79,15 @@
     "localizacao": "Rua Principal, 123",
     "valor": null,
     "tipo": null,
-    "metragem": null,
-    "fotos": null
+    "descricao": null,
+    "metragem": 110,
+    "tamanhoAreaConst": null,
+    "qtdQuartos": 4,
+    "vagas": 1,
+    "qtdBanheiros": null,
+    "fotos": null,
+    "destaque": false,
+    "eDisponivel": false
   },
   {
     "id": 6666,
@@ -62,8 +97,15 @@
     "localizacao": "Rua pereira, 102",
     "valor": null,
     "tipo": null,
-    "metragem": null,
-    "fotos": null
+    "descricao": null,
+    "metragem": 160,
+    "tamanhoAreaConst": null,
+    "qtdQuartos": 3,
+    "vagas": 0,
+    "qtdBanheiros": null,
+    "fotos": null,
+    "destaque": false,
+    "eDisponivel": false
   },
   {
     "id": 7777,
@@ -73,8 +115,15 @@
     "localizacao": "Rua do lago, 42",
     "valor": null,
     "tipo": null,
-    "metragem": null,
-    "fotos": null
+    "descricao": null,
+    "metragem": 120,
+    "tamanhoAreaConst": null,
+    "qtdQuartos": 4,
+    "vagas": 2,
+    "qtdBanheiros": null,
+    "fotos": null,
+    "destaque": false,
+    "eDisponivel": false
   },
   {
     "id": 8888,
@@ -84,7 +133,14 @@
     "localizacao": "Rua afonso, 452",
     "valor": null,
     "tipo": null,
-    "metragem": null,
-    "fotos": null
+    "descricao": null,
+    "metragem": 200,
+    "tamanhoAreaConst": null,
+    "qtdQuartos": 4,
+    "vagas": 1,
+    "qtdBanheiros": null,
+    "fotos": null,
+    "destaque": false,
+    "eDisponivel": false
   }
 ]
