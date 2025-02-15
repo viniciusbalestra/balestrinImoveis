@@ -71,7 +71,7 @@ function imoveisDestaqueToHtml(imovel) {
     if (window.location.pathname === '/pages/investimentos.html') {
         // Usuário está na página de investimentos
         divClass = "pagina-investimento"
-    } else if (window.location.pathname === '/index.html') {
+    } else {
         // Usuário está na home
         divClass = "investimento"
     };
@@ -105,7 +105,7 @@ function imoveisTerceirosToHtml(imovel) {
     if (window.location.pathname === '/pages/investimentos.html') {
         // Usuário está na página de investimentos
         divClass = "pagina-investimento"
-    } else if (window.location.pathname === '/index.html') {
+    } else {
         // Usuário está na home
         divClass = "investimento"
     };
