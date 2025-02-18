@@ -67,6 +67,8 @@ async function filtragemDeImoveis (dados, categoria) {
 
 function imoveisDestaqueToHtml(imovel) {
     let divClass = "";
+    const fotoCapaUrl = `/src/assets/uploads/${imovel.id}/${imovel.fotoCapa}`;
+    /*const fotosUrls = imovel.fotos.map(foto => `/src/assets/uploads/${imovel.id}/${foto}`);*/
 
     if (window.location.pathname === '/pages/investimentos.html') {
         // Usuário está na página de investimentos
@@ -80,7 +82,7 @@ function imoveisDestaqueToHtml(imovel) {
         <div class="${divClass}">
             <div>
                 <span id="${divClass}-photo">
-                    <img src="/src/assets/background/olympus.png" alt="foto do investimento">
+                    <img src="${fotoCapaUrl}" alt="foto do investimento">
                 </span>
                 <div class="${divClass}-info">
                     <div>
@@ -101,6 +103,8 @@ function imoveisDestaqueToHtml(imovel) {
 
 function imoveisTerceirosToHtml(imovel) {
     let divClass = "";
+    const fotoCapaUrl = `/src/assets/uploads/${imovel.id}/${imovel.fotoCapa}`;
+    /*const fotosUrls = imovel.fotos.map(foto => `/src/assets/uploads/${imovel.id}/${foto}`);*/
 
     if (window.location.pathname === '/pages/investimentos.html') {
         // Usuário está na página de investimentos
@@ -117,7 +121,7 @@ function imoveisTerceirosToHtml(imovel) {
         <div class="${divClass}">
             <div>
                 <span id="${divClass}-photo">
-                    <img src="/src/assets/background/olympus.png" alt="foto do investimento">
+                    <img src="${fotoCapaUrl}" alt="foto do investimento">
                 </span>
                 <div class="${divClass}-info">
                     <div>

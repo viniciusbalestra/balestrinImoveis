@@ -26,7 +26,8 @@ async function getAllImoveis(categoria) {
                 row.qtdQuartos,
                 row.vagas,
                 row.qtdBanheiros,
-                row.fotos
+                row.fotos,
+                row.fotoCapa
             );
             
             console.log(imovel, "1");
@@ -53,12 +54,12 @@ async function queries() {
         console.log("Imóveis de terceiros:", imoveisTerceiros);
 
         imoveisPlanta.forEach(imovel => {
-            console.log(`ID: ${imovel.id}, Categoria: ${imovel.categoria}, Titulo: ${imovel.titulo}, Slogan: ${imovel.slogan}, Localizacao: ${imovel.localizacao}, fotos: ${imovel.fotos}`);
+            console.log(`ID: ${imovel.id}, Categoria: ${imovel.categoria}, Titulo: ${imovel.titulo}, Slogan: ${imovel.slogan}, Localizacao: ${imovel.localizacao}, fotos: ${imovel.fotos}, fotoCapa: ${imovel.fotoCapa}`);
         });
 
 
         imoveisTerceiros.forEach(imovel => {
-            console.log(`ID: ${imovel.id}, Categoria: ${imovel.categoria}, Titulo: ${imovel.titulo}, Localizacao: ${imovel.localizacao}, Valor: ${imovel.valor}, Tipo ${imovel.tipo}, Metragem: ${imovel.metragem}, fotos: ${imovel.fotos}, qtdBanheiros: ${imovel.qtdBanheiros}, qtdQuartos: ${imovel.qtdQuartos}, vagas: ${imovel.vagas}`);
+            console.log(`ID: ${imovel.id}, Categoria: ${imovel.categoria}, Titulo: ${imovel.titulo}, Localizacao: ${imovel.localizacao}, Valor: ${imovel.valor}, Tipo ${imovel.tipo}, Metragem: ${imovel.metragem}, fotos: ${imovel.fotos}, qtdBanheiros: ${imovel.qtdBanheiros}, qtdQuartos: ${imovel.qtdQuartos}, vagas: ${imovel.vagas}, fotoCapa: ${imovel.fotoCapa}`);
         });
 
         const allImoveis = [...imoveisPlanta, ...imoveisTerceiros];
@@ -105,7 +106,7 @@ async function insertImoveis(imoveis) {
         for (const imovel of imoveis) {
             const query = `
                 INSERT INTO imoveis (ID, categoria, titulo, slogan, localizacao, valor, tipo, metragem, tamanhoAreaConst, qtdQuartos, vagas, qtdBanheiros, fotos)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 ON DUPLICATE KEY UPDATE
                     categoria = VALUES(categoria),
                     titulo = VALUES(titulo),
@@ -119,10 +120,11 @@ async function insertImoveis(imoveis) {
                     vagas = VALUES(vagas),
                     qtdBanheiros = VALUES(qtdBanheiros),
                     fotos = VALUES(fotos);
+                    fotoCapa = VALUES(fotoCapa);
             `;
 
             const values = [
-                imovel.id, imovel.categoria, imovel.titulo, imovel.slogan, imovel.localizacao, imovel.valor, imovel.tipo, imovel.metragem, imovel.tamanhoAreaConst, imovel.qtdQuartos, imovel.vagas, imovel.qtdBanheiros, imovel.fotos
+                imovel.id, imovel.categoria, imovel.titulo, imovel.slogan, imovel.localizacao, imovel.valor, imovel.tipo, imovel.metragem, imovel.tamanhoAreaConst, imovel.qtdQuartos, imovel.vagas, imovel.qtdBanheiros, imovel.fotos, imovel.fotoCapa
             ];
         try{
             await pool.execute(query, values);

@@ -210,8 +210,9 @@ h2 {
 }
 
 #investimento-photo img {
-    max-width: 288px;
-    height: auto;
+    width: 18rem;
+    height: 14.813rem;
+    object-fit: cover;
 }
 
 .investimento-info {
@@ -251,6 +252,7 @@ h2 {
 .investimento-descricao {
     font-size: 14px;
     font-family: var(--fonte-secundaria);
+    padding: 0 0.62rem;
 }
 
 .detail {

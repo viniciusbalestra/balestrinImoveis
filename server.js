@@ -10,6 +10,7 @@ const bodyParser = require('body-parser');
 const { getAllImoveisFromJSON } = require('./queries'); // Importa getAllImoveisFromJSON
 const Imovel = require('./src/scripts/classeImovel');
 const cors = require('cors');
+const upload = require('./upload');
 
 app.use(bodyParser.json());
 
@@ -115,4 +116,24 @@ process.on('SIGINT', () => {
         console.log('pool de conexões fechado')
         process.exit(0);
     });
+});
+
+app.post('/upload', upload.array('fotos'), (req, res) => {
+    const { imovelId, fotoCapa } = req.body;
+    const fotos = req.files.map(file => file.filename);
+
+    // Salvar dados no banco de dados
+    const query = `
+        UPDATE imoveis 
+        SET fotos = ?, fotoCapa = ? 
+        WHERE id = ?
+    `;
+    const values = [JSON.stringify(fotos), fotoCapa, imovelId];
+
+    pool.execute(query, values)
+        .then(() => res.send('Upload realizado com sucesso!'))
+        .catch(err => {
+            console.error(err);
+            res.status(500).send('Erro ao salvar fotos no banco de dados.');
+        });
 });
