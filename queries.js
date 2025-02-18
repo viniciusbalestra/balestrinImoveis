@@ -77,10 +77,29 @@ async function queries() {
     };
 };
 
+async function criarPastaImovel(imovelId) {
+    const pastaImovel = path.join(__dirname, '/src/assets/uploads', imovelId);
+
+    try {
+        await fs.promises.mkdir(pastaImovel, {recursive: true});
+        console.log(`Pastapara o imóvel ${imovelId}criada ou já existente. `); 
+    } catch (erro) {
+        console.error(`Erro ao criar pasta para o imóvel ${imovelId}:`, erro);
+    }
+}
+
 async function getAllImoveisFromJson() {
     try {
         const data = await fs.readFile(jsonFilePath, 'utf-8');
-        return JSON.parse(data);
+        const imoveis = JSON.parse(data);
+
+        // Executa a função para criar a pasta para cada imóvel
+        for (const imovel of imoveis) {
+            await criarPastaImovel(imovel.id);
+        }
+
+        return imoveis;
+        
     } catch (error) {
         console.error('Erro ao ler allImoveis.json: ', error);
         
