@@ -19,7 +19,7 @@
     padding-bottom: 4rem;
     gap: 1.5rem;
     text-decoration: none;
-    color: var(--cor-texto);
+    color: var(--cor-escuro);
 }
 
 #pagina-contato-informacoes p {
@@ -36,7 +36,7 @@
 }
 
 .link-pagina-contato {
-    color: var(--cor-primaria);
+    color: var(--cor-escuro);
     font-family: var(--fonte-secundaria);
     font-weight: 700;
 }

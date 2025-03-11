@@ -106,8 +106,9 @@ main {
 }
 
 #pagina-investimento-photo img {
-    max-width: 14.4rem;
-    height: auto;
+    width: 14.4rem;
+    height: 11.4rem;
+    object-fit: cover;
 }
 
 .pagina-investimento-info {
