@@ -78,6 +78,10 @@ main {
     transition: transform 0.3s ease;
 }
 
+.pagina-investimento a {
+    color: var(--cor-texto);
+}
+
 #pagina-investimentos-titulo {
     text-transform: uppercase;
     letter-spacing: 1.5px;

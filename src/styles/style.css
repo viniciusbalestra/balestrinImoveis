@@ -199,6 +199,10 @@ h2 {
     transition: transform 0.3s ease; 
 }
 
+.investimento a {
+    color: var(--cor-texto);
+}
+
 .investimento:hover {
     cursor: pointer;
     transform: scale(1.03);

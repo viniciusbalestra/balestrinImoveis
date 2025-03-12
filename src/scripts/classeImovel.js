@@ -14,12 +14,13 @@ class Imovel {
     qtdBanheiros;
     fotos;
     fotoCapa;
+    url;
     destaque = false;
     eDisponivel = false;
     
 
 
-    constructor (id, categoria, titulo, slogan, localizacao, valor, tipo, descricao, metragem, tamanhoAreaConst, qtdQuartos, vagas, qtdBanheiros, fotos, fotoCapa) {
+    constructor (id, categoria, titulo, slogan, localizacao, valor, tipo, descricao, metragem, tamanhoAreaConst, qtdQuartos, vagas, qtdBanheiros, fotos, fotoCapa, url) {
         this.id = id;
         this.categoria = categoria;
         this.titulo = titulo;
@@ -35,6 +36,7 @@ class Imovel {
         this.qtdBanheiros = qtdBanheiros;
         this.fotos = fotos;
         this.fotoCapa = fotoCapa;
+        this.url = url;
         this.destaque = false;
         this.eDisponivel = false;
     };

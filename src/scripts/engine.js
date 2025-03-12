@@ -80,7 +80,7 @@ function imoveisDestaqueToHtml(imovel) {
 
     return `
         <div class="${divClass}">
-            <div>
+            <a href="${imovel.url}">
                 <span id="${divClass}-photo">
                     <img src="${fotoCapaUrl}" alt="foto do investimento">
                 </span>
@@ -96,7 +96,7 @@ function imoveisDestaqueToHtml(imovel) {
                         <p class="${divClass}-descricao">"${imovel.slogan}"</p>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
     `;
 };
@@ -119,7 +119,7 @@ function imoveisTerceirosToHtml(imovel) {
 
     return `
         <div class="${divClass}">
-            <div>
+            <a href="${imovel.url}">
                 <span id="${divClass}-photo">
                     <img src="${fotoCapaUrl}" alt="foto do investimento">
                 </span>
@@ -146,7 +146,7 @@ function imoveisTerceirosToHtml(imovel) {
                         </div>            
                     </div>    
                 </div>
-            </div>
+            </a>
         </div>
     `;
 }
