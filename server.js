@@ -12,6 +12,8 @@ const Imovel = require('./src/scripts/classeImovel');
 const cors = require('cors');
 const upload = require('./upload');
 
+import { getAllImoveisFromJson } from './queries.js';
+
 app.use(bodyParser.json());
 
 app.use(express.json());
@@ -137,3 +139,18 @@ app.post('/upload', upload.array('fotos'), (req, res) => {
             res.status(500).send('Erro ao salvar fotos no banco de dados.');
         });
 });
+
+async function iniciarServidor() {
+    try {
+        await getAllImoveisFromJson();
+        console.log('Arquivo JSON gerado com sucesso!');
+    } catch (error) {
+        console.error('Erro ao gerar arquivo JSON:', error);
+    }
+
+    app.listen(port, () => {
+        console.log(`Servidor rodando em http://localhost:${port}`);
+    });
+}
+
+iniciarServidor();

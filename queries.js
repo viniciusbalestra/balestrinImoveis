@@ -118,15 +118,15 @@ async function getAllImoveisFromJson() {
 ///Insere imóveis ao banco de dados
 async function insertImoveis(imoveis) {
     try {
-        if(!imoveis || imoveis.lenght === 0) {
+        if (!imoveis || imoveis.length === 0) {
             console.log('Nenhum imóvel para inserir.');
             return;
-        };
+        }
 
         for (const imovel of imoveis) {
             const query = `
-                INSERT INTO imoveis (ID, categoria, titulo, slogan, localizacao, valor, tipo, metragem, tamanhoAreaConst, qtdQuartos, vagas, qtdBanheiros, fotos)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                INSERT INTO imoveis (categoria, titulo, slogan, localizacao, valor, tipo, metragem, tamanhoAreaConst, qtdQuartos, vagas, qtdBanheiros, fotos, fotoCapa, url)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 ON DUPLICATE KEY UPDATE
                     categoria = VALUES(categoria),
                     titulo = VALUES(titulo),
@@ -145,21 +145,21 @@ async function insertImoveis(imoveis) {
             `;
 
             const values = [
-                imovel.id, imovel.categoria, imovel.titulo, imovel.slogan, imovel.localizacao, imovel.valor, imovel.tipo, imovel.metragem, imovel.tamanhoAreaConst, imovel.qtdQuartos, imovel.vagas, imovel.qtdBanheiros, imovel.fotos, imovel.fotoCapa, imovel.url
+                imovel.categoria, imovel.titulo, imovel.slogan, imovel.localizacao, imovel.valor, imovel.tipo, imovel.metragem, imovel.tamanhoAreaConst, imovel.qtdQuartos, imovel.vagas, imovel.qtdBanheiros, imovel.fotos, imovel.fotoCapa, imovel.url
             ];
-        try{
-            await pool.execute(query, values);
-            console.log('Imóvel inserido com sucesso: ',imovel.titulo)
-        
-        } catch (error) {
-            console.error("Erro ao inserir imovel: ", imovel, error);
-        };
-    }
+            try {
+                await pool.execute(query, values);
+                console.log('Imóvel inserido com sucesso: ', imovel.titulo)
 
-    console.log('Inserção de imóveis concluída');
-    
-    } catch(error) {
-        console.error('Erro geral na inserção de imóveis: ',error);
+            } catch (error) {
+                console.error("Erro ao inserir imovel: ", imovel, error);
+            };
+        }
+
+        console.log('Inserção de imóveis concluída');
+
+    } catch (error) {
+        console.error('Erro geral na inserção de imóveis: ', error);
         throw error;
     };
 }
@@ -176,7 +176,7 @@ async function queryDatabase() {
 }
 
 queryDatabase();
+queries();
 
 module.exports = { getAllImoveis, insertImoveis, queryDatabase, getAllImoveisFromJson, queries };
 
-queries();
