@@ -1,0 +1,69 @@
+@import url(/src/styles/style.css);
+@import url(/src/styles/reset.css);
+
+#about {
+    border: 0px solid transparent;
+    border-radius: 12px;
+    background-color: var(--cor-branco);
+    margin: 5% auto;
+    text-align: center;
+    overflow: hidden;
+}
+
+#about-container {
+    display: grid;
+    gap: 2rem 3rem;
+    border: 1px solid var(--cor-cinza);
+    margin: 0 2rem;
+}
+
+#about-container h2 {
+    padding-top: 2rem;
+    align-items: center;
+    color: var(--cor-texto);
+    font-size: 36px;
+}
+
+#about-container h2,
+#about-text {
+    display: flex;
+    justify-content: center;
+    text-shadow: 1.5px 1.5px 3px var(--cor-branco);
+}
+
+#about-text {
+    font-size: 24px;
+    margin: 0 2rem;
+    font-family: var(--fonte-alternativa);
+    font-weight: 400;
+    line-height: 33px;
+}
+
+
+#about-photo {
+    margin: 1rem;
+    grid-row-start: 1;
+    grid-row-end: 4;
+}
+
+#about-photo img {
+    max-height: 500px;
+    width: auto;
+    margin-left: 1rem;
+    border: transparent .2px solid;
+    border-radius: 10px;
+}
+
+#about-address {
+    display: grid;
+    grid-column-start: 2;
+    margin: 1.5rem auto;
+    min-width: 650px;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+    font-style: normal;
+    letter-spacing: 1px;
+    column-gap: 3rem;
+    row-gap: 1rem;
+}

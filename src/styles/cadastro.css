@@ -1,0 +1,101 @@
+@import url(/src/styles/style.css);
+@import url(/src/styles/reset.css);
+
+#cadastro-imovel {
+    padding: 3rem 1.5rem;
+}
+
+#titulo-cadastro {
+    margin-bottom: 1rem;
+    font-size: 24px;
+    font-weight: 500;
+    font-family: var(--fonte-alternativa);
+    border-bottom: 1px solid var(--cor-cinza);
+    color: var(--cor-escuro);
+}
+
+.gerais-espacos {
+    height: 2.5rem;
+    border: 1px solid var(--cor-cinza);
+    border-radius: 7px;
+    padding-left: .8rem;
+    margin-bottom: .5rem;
+}
+
+#numeroDiv,
+#estadoDiv {
+    width: 5rem;
+}
+
+#ruaDiv,
+#numeroDiv,
+#cidadeDiv,
+#estadoDiv {
+    display: flex;
+    flex-direction: column;
+}
+
+#fieldset-endereco {
+    display: grid;
+}
+
+#ruaDiv,
+#cidadeDiv {
+    width: 76.438rem;
+    grid-column-start: 1;
+}
+
+#numeroDiv {
+    grid-column-start: 2;
+}
+
+#descricao {
+    height: 5rem;
+}
+
+#fieldset-tipo-imovel {
+    margin: 1rem 0;
+}
+
+.tipo-imovel-input {
+    margin-top: .6rem;
+}
+
+#fotos,
+#fotoCapa {
+    margin: .5rem 0;
+}
+
+#fotoCapa {
+    width: 16.25rem;
+    height: 1.5rem;
+}
+
+#verificar-disponibilidade,
+#cadastro-submit {
+    margin-top: 2rem;
+    padding: .5rem;
+    height: 3rem;
+    border: 1px solid var(--cor-primaria);
+    border-radius: 7px;
+    background-color: var(--cor-primaria);
+    color: var(--cor-branco);
+}
+
+#verificar-disponibilidade:hover,
+#cadastro-submit:hover {
+    background-color: var(--cor-destaque);
+}
+
+#verificar-disponibilidade:hover,
+#cadastro-submit:hover,
+#fotos,
+#fotoCapa {
+    cursor: pointer;
+}
+
+.miniatura-foto {
+    max-height: 15rem;
+    max-width: 15rem;
+    margin-right: 2rem;
+}

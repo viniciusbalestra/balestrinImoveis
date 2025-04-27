@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de imóveis</title>
+    <link rel="stylesheet" href="/src/styles/style.css">
+    <link rel="icon" type="image/ico" href="/src/assets/favicon/favicon.ico">
+    <script src="/src/scripts/headerFooterLoader.js" defer></script>
+<body>
+    <div id="header-container"></div>
+    <main>
+        <form id="cadastro-imovel">
+            <fieldset>
+                
+                <div id="titulo-cadastro">
+                    <legend>Dados do Imóvel</legend>
+                </div>
+                
+
+                <label for="tipo">Tipo*</label>
+                <select class="gerais-espacos" id="tipo" required>
+                    <option value="">Selecione </option>
+                    <option value="casa">Casa</option>
+                    <option value="apartamento">Apartamento</option>
+                    <option value="sobrado">Sobrado</option>
+                    <option value="terreno">Terreno</option>
+                    <option value="investimento">Investimento na planta</option>
+                    <option value="fazenda">Fazenda</option>
+                    <option value="sitio/chacara">Sítio/Chácara</option>
+                    <option value="comercio">Comércio</option>
+                    </select>
+        
+                <label for="titulo">Nome do imóvel*</label>
+                <input class="gerais-espacos" type="text" name="titulo" id="titulo" required>
+        
+                <fieldset id="fieldset-endereco">
+                    <div id="ruaDiv">
+                        <label for="rua">Rua*</label>
+                        <input class="gerais-espacos" id="rua" type="text" name="rua" required>
+                    </div>
+                    
+                    <div id="numeroDiv">
+                        <label for="numero">Número*</label>
+                        <input class="gerais-espacos" id="numero" type="text" name="numero" required>
+                    </div>
+                    
+                    <div id="cidadeDiv">
+                        <label for="cidade">Cidade*</label>
+                        <input class="gerais-espacos" id="cidade" type="text" name="cidade" required>
+                    </div>
+                    
+                    <div id="estadoDiv">
+                        <label for="estado">Estado*</label>
+                        <input class="gerais-espacos" id="estado" type="text" name="estado" placeholder="ex: PR" required>
+                    </div>
+                </fieldset>
+                
+                <label for="slogan">Slogan</label>
+                <input class="gerais-espacos" type="text" name="slogan" id="slogan" placeholder="Para investimentos na planta">
+        
+                <label for="valor">Valor*</label>
+                <input class="gerais-espacos" type="number" name="valor" id="valor" placeholder="ex: 250.000" required>
+        
+                <label for="descricao">Descrição breve</label>
+                <input class="gerais-espacos" type="text" name="descricao" id="descricao">
+        
+                <label for="metragem">Metragem*</label>
+                <input class="gerais-espacos" type="number" name="metragem" id="metragem" required>
+        
+                <label for="qtdQuartos">Quantidade de quartos*</label>
+                <input class="gerais-espacos" type="number" name="qtdQuartos" id="qtdQuartos" required>
+        
+                <label for="vagas">Vagas de garagem</label>
+                <input class="gerais-espacos" type="number" name="vagas" id="vagas">
+        
+                <label for="qtdBanheiros">Quantidade de banheiros</label>
+                <input class="gerais-espacos" type="number" name="qtdBanheiros" id="qtdBanheiros">
+        
+                <label for="url">Link do VGV</label>
+                <input class="gerais-espacos" type="url" name="url" id="url">
+            </fieldset>
+        
+            <fieldset id="fieldset-categoria-imovel">
+                <legend>Tipo de Imóvel</legend>
+                <span class="tipo-imovel-input">
+                    <input type="radio" name="categoriaImovel" value="planta" id="planta">
+                    <label for="planta">Imóveis na planta</label>
+                </span>
+                <span class="tipo-imovel-input">
+                    <input type="radio" name="categoriaImovel" value="terceiros" id="terceiros">
+                    <label for="terceiros">Imóveis de terceiros</label>
+                </span>
+            </fieldset>
+
+            <fieldset id="fieldset-fotos">
+                <legend>Fotos</legend>
+                <input type="file" name="fotos" id="fotos" multiple>
+                <div id="preview-fotos"></div>
+                <select name="fotoCapa" id="fotoCapa">
+                    <option value="">Selecione a foto de capa</option>
+                </select>
+            </fieldset>
+        
+            <button type="button" id="verificar-disponibilidade" onclick="verificarDisponibilidade()">Verificar Disponibilidade</button>
+            <svg id="icone-disponibilidade" width="24" height="24" viewBox="0 0 24 24" style="display: none;">
+                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+            </svg>
+            <button type="submit" id="cadastro-submit" onclick="receberValores()">Cadastrar</button>
+        </form>
+    </main>
+    <div id="footer-container"></div>
+    <script type="module" src="/src/scripts/cadastro.js"></script>
+</body>
