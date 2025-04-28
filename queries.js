@@ -1,4 +1,4 @@
-///Executa as consultas no banco de dados
+/// Executa as consultas na base de dados
 const { connect, pool } = require('./connection');
 const fs = require('fs/promises');
 const path = require('path');
@@ -6,177 +6,190 @@ const Imovel = require('./src/scripts/classeImovel');
 
 const jsonFilePath = path.join(__dirname, 'allImoveis.json');
 
-///consulta os imoveis no banco de dados (separa por categoria)
-async function getAllImoveis(categoria) {
+/**
+ * Busca imóveis da base de dados, opcionalmente por categoria.
+ * @param {string} [categoria] - A categoria dos imóveis a serem buscados. Se omitido, busca todos.
+ * @returns {Promise<Imovel[]>} Um array de objetos Imovel.
+ * @throws {Error} Se ocorrer um erro na consulta.
+ */
+async function buscarImoveis(categoria) {
     try {
-        const [rows] = await pool.execute('SELECT * FROM imoveis WHERE categoria = ?', [categoria]);
+        let query = 'SELECT * FROM imoveis';
+        const params = [];
 
-        const imoveis = rows.map(row => {
-            const imovel = new Imovel(
-                row.id,
-                row.categoria,
-                row.titulo,
-                row.slogan,
-                row.localizacao,
-                row.valor,
-                row.tipo,
-                row.descricao,
-                row.metragem,
-                row.tamanhoAreaConst,
-                row.qtdQuartos,
-                row.vagas,
-                row.qtdBanheiros,
-                row.fotos,
-                row.fotoCapa,
-                row.url
-            );
-            
-            console.log(imovel, "1");
-            return imovel;
-        });
+        if (categoria) {
+            query += ' WHERE categoria = ?';
+            params.push(categoria);
+        }
 
-        console.log(imoveis, "2");
+        const [rows] = await pool.execute(query, params);
+
+        const imoveis = rows.map(row => new Imovel(
+            row.id,
+            row.categoria,
+            row.titulo,
+            row.slogan,
+            row.localizacao,
+            row.valor,
+            row.tipo,
+            row.descricao,
+            row.metragem,
+            row.tamanhoAreaConst,
+            row.qtdQuartos,
+            row.vagas,
+            row.qtdBanheiros,
+            row.fotos,
+            row.fotoCapa,
+            row.url
+        ));
+        
         return imoveis;
 
     } catch (error) {
-        console.error('Erro ao executar a consulta:', error);
+        console.error(`Erro ao buscar imóveis (categoria: ${categoria || 'todos'}):`, error);
         throw error;
-    };
-}
-
-
-///Pega cada imóvel e separa por chave/valor e os coloca em um arquivo json nessas configurações
-async function queries() {
-    try {
-        const imoveisPlanta = await getAllImoveis('planta');
-        const imoveisTerceiros = await getAllImoveis('terceiros');
-
-        console.log("Imóveis na planta:", imoveisPlanta);
-        console.log("Imóveis de terceiros:", imoveisTerceiros);
-
-        imoveisPlanta.forEach(imovel => {
-            console.log(`ID: ${imovel.id}, Categoria: ${imovel.categoria}, Titulo: ${imovel.titulo}, Slogan: ${imovel.slogan}, Localizacao: ${imovel.localizacao}, fotos: ${imovel.fotos}, fotoCapa: ${imovel.fotoCapa}, url: ${imovel.url}`);
-        });
-
-
-        imoveisTerceiros.forEach(imovel => {
-            console.log(`ID: ${imovel.id}, Categoria: ${imovel.categoria}, Titulo: ${imovel.titulo}, Localizacao: ${imovel.localizacao}, Valor: ${imovel.valor}, Tipo ${imovel.tipo}, Metragem: ${imovel.metragem}, fotos: ${imovel.fotos}, qtdBanheiros: ${imovel.qtdBanheiros}, qtdQuartos: ${imovel.qtdQuartos}, vagas: ${imovel.vagas}, fotoCapa: ${imovel.fotoCapa}, url: ${imovel.url}`);
-        });
-
-        const allImoveis = [...imoveisPlanta, ...imoveisTerceiros];
-
-        ///Escreve o json
-        try {
-            
-            await fs.writeFile('allImoveis.json', JSON.stringify(allImoveis, null, 2));
-
-        } catch(err) {
-            console.error('Erro ao escrever no arquivo:', err);
-        };
-    } catch(error) {
-        console.error("Erro na função queries:", error)
-    };
-};
-
-async function criarPastaImovel(imovelId) {
-    const pastaImovel = path.join(__dirname, '/src/assets/uploads', imovelId);
-
-    try {
-        await fs.promises.mkdir(pastaImovel, {recursive: true});
-        console.log(`Pastapara o imóvel ${imovelId}criada ou já existente. `); 
-    } catch (erro) {
-        console.error(`Erro ao criar pasta para o imóvel ${imovelId}:`, erro);
     }
 }
 
-async function getAllImoveisFromJson() {
+/**
+ * Gera um arquivo JSON com todos os imóveis da base de dados.
+ * @returns {Promise<void>}
+ * @throws {Error} Se ocorrer um erro ao buscar os imóveis ou escrever o arquivo.
+ */
+async function gerarArquivoImoveis() {
     try {
-        const data = await fs.readFile(jsonFilePath, 'utf-8');
-        const imoveis = JSON.parse(data);
+        const imoveisPlanta = await buscarImoveis('planta');
+        const imoveisTerceiros = await buscarImoveis('terceiros');
+        const todosImoveis = [...imoveisPlanta, ...imoveisTerceiros];
 
-        // Executa a função para criar a pasta para cada imóvel
-        for (const imovel of imoveis) {
-            await criarPastaImovel(imovel.id);
-        }
+        await fs.writeFile(jsonFilePath, JSON.stringify(todosImoveis, null, 2));
+        console.log(`Arquivo ${jsonFilePath} gerado com sucesso.`);
 
-        return imoveis;
-        
     } catch (error) {
-        console.error('Erro ao ler allImoveis.json: ', error);
-        
-        if (error.code === 'ENOENT') {
-            console.log('Arquivo allImoveis.json não encontrado.Gerando um novo...');
-
-            await queries();
-            return getAllImoveisFromJson();
-        };
-
-        return [];
+        console.error('Erro ao gerar arquivo de imóveis:', error);
+        throw error; // Importante: Propagar o erro para quem chama a função
     }
 }
 
-///Insere imóveis ao banco de dados
-async function insertImoveis(imoveis) {
+/**
+ * Cria o diretório para um imóvel, se necessário.
+ * @param {string} imovelId - O ID do imóvel.
+ * @returns {Promise<void>}
+ * @throws {Error} Se ocorrer um erro ao criar o diretório.
+ */
+async function criarDiretorioImovel(imovelId) {
+    const diretorioImovel = path.join(__dirname, '/src/assets/uploads', imovelId);
     try {
-        if (!imoveis || imoveis.length === 0) {
-            console.log('Nenhum imóvel para inserir.');
-            return;
-        }
+        await fs.promises.mkdir(diretorioImovel, { recursive: true });
+        console.log(`Diretório para o imóvel ${imovelId} criado ou já existente.`);
+    } catch (error) {
+        console.error(`Erro ao criar diretório para o imóvel ${imovelId}:`, error);
+        throw error; // Propaga o erro
+    }
+}
 
+/**
+ * Obtém todos os imóveis do arquivo JSON. Se o arquivo não existir, gera-o a partir do banco de dados.
+ * @returns {Promise<Imovel[]>} Um array de objetos Imovel.
+ * @throws {Error} Se ocorrer um erro ao ler ou gerar o arquivo JSON.
+ */
+async function obterImoveisDoArquivo() {
+    try {
+        const dados = await fs.readFile(jsonFilePath, 'utf-8');
+        const imoveis = JSON.parse(dados);
+
+        for (const imovel of imoveis) {
+            await criarDiretorioImovel(imovel.id);
+        }
+        return imoveis;
+
+    } catch (error) {
+        if (error.code === 'ENOENT') {
+            console.log('Arquivo allImoveis.json não encontrado. Gerando um novo...');
+            await gerarArquivoImoveis();
+            // Tenta ler o arquivo novamente após a geração
+            return obterImoveisDoArquivo();
+        }
+        console.error('Erro ao obter imóveis do arquivo:', error);
+        throw error; // Propaga o erro para o chamador
+    }
+}
+
+/**
+ * Insere ou atualiza imóveis no banco de dados.
+ * @param {Imovel[]} imoveis - Um array de objetos Imovel para inserir ou atualizar.
+ * @returns {Promise<void>}
+ * @throws {Error} Se ocorrer um erro durante a inserção ou atualização.
+ */
+async function inserirOuAtualizarImoveis(imoveis) {
+    if (!imoveis || imoveis.length === 0) {
+        console.log('Nenhum imóvel para inserir ou atualizar.');
+        return;
+    }
+
+    try {
         for (const imovel of imoveis) {
             const query = `
-                INSERT INTO imoveis (categoria, titulo, slogan, localizacao, valor, tipo, metragem, tamanhoAreaConst, qtdQuartos, vagas, qtdBanheiros, fotos, fotoCapa, url)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                INSERT INTO imoveis (id, categoria, titulo, slogan, localizacao, valor, tipo, metragem, tamanhoAreaConst, 
+                                    qtdQuartos, vagas, qtdBanheiros, fotos, fotoCapa, url)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 ON DUPLICATE KEY UPDATE
-                    categoria = VALUES(categoria),
-                    titulo = VALUES(titulo),
-                    slogan = VALUES(slogan),
-                    localizacao = VALUES(localizacao),
-                    valor = VALUES(valor),
-                    tipo = VALUES(tipo),
-                    metragem = VALUES(metragem),
-                    tamanhoAreaConst = VALUES(tamanhoAreaConst),
-                    qtdQuartos = VALUES(qtdQuartos),
-                    vagas = VALUES(vagas),
-                    qtdBanheiros = VALUES(qtdBanheiros),
-                    fotos = VALUES(fotos),
-                    fotoCapa = VALUES(fotoCapa),
-                    url = VALUES(url);
+                    categoria = VALUES(categoria), titulo = VALUES(titulo), slogan = VALUES(slogan), 
+                    localizacao = VALUES(localizacao), valor = VALUES(valor), tipo = VALUES(tipo), 
+                    metragem = VALUES(metragem), tamanhoAreaConst = VALUES(tamanhoAreaConst), 
+                    qtdQuartos = VALUES(qtdQuartos), vagas = VALUES(vagas), 
+                    qtdBanheiros = VALUES(qtdBanheiros), fotos = VALUES(fotos), 
+                    fotoCapa = VALUES(fotoCapa), url = VALUES(url);
             `;
-
             const values = [
-                imovel.categoria, imovel.titulo, imovel.slogan, imovel.localizacao, imovel.valor, imovel.tipo, imovel.metragem, imovel.tamanhoAreaConst, imovel.qtdQuartos, imovel.vagas, imovel.qtdBanheiros, imovel.fotos, imovel.fotoCapa, imovel.url
+                imovel.id, imovel.categoria, imovel.titulo, imovel.slogan, imovel.localizacao, 
+                imovel.valor, imovel.tipo, imovel.metragem, imovel.tamanhoAreaConst, 
+                imovel.qtdQuartos, imovel.vagas, imovel.qtdBanheiros, imovel.fotos, 
+                imovel.fotoCapa, imovel.url
             ];
-            try {
-                await pool.execute(query, values);
-                console.log('Imóvel inserido com sucesso: ', imovel.titulo)
-
-            } catch (error) {
-                console.error("Erro ao inserir imovel: ", imovel, error);
-            };
+            await pool.execute(query, values);
+            console.log(`Imóvel ${imovel.titulo} inserido ou atualizado com sucesso.`);
         }
-
-        console.log('Inserção de imóveis concluída');
+        console.log('Inserção ou atualização de imóveis concluída.');
 
     } catch (error) {
-        console.error('Erro geral na inserção de imóveis: ', error);
+        console.error('Erro ao inserir ou atualizar imóveis:', error);
         throw error;
-    };
-}
-
-async function queryDatabase() {
-    try {
-        const [rows, fields] = await pool.execute('SELECT * FROM imoveis');
-        console.log("Dados da tabela:", rows);
-        return rows
-    } catch (error) {
-        console.error("Erro ao executar query:", error);
-        return null
     }
 }
 
-queryDatabase();
-queries();
+/**
+ * Executa uma consulta ao banco de dados para selecionar todos os imóveis.
+ * @returns {Promise<any[]>} Um array com os resultados da consulta.
+ * @throws {Error} Se ocorrer um erro ao executar a consulta.
+ */
+async function consultarBancoDeDados() {
+    try {
+        const [rows] = await pool.execute('SELECT * FROM imoveis');
+        console.log("Dados da tabela:", rows);
+        return rows;
+    } catch (error) {
+        console.error("Erro ao consultar banco de dados:", error);
+        throw error;
+    }
+}
 
-module.exports = { getAllImoveis, insertImoveis, queryDatabase, getAllImoveisFromJson, queries };
+// Chamadas das funções (mantenha fora do escopo global)
+(async () => {
+    try {
+        await consultarBancoDeDados();
+        await gerarArquivoImoveis();
+    } catch (error) {
+        // Já tratamos o erro dentro das funções, mas você pode adicionar um tratamento extra aqui se necessário
+        console.error("Erro no fluxo principal:", error);
+    }
+})();
 
+// Exporta as funções para serem utilizadas em outros módulos
+module.exports = { 
+    buscarImoveis, 
+    inserirOuAtualizarImoveis, 
+    consultarBancoDeDados, 
+    obterImoveisDoArquivo, 
+    gerarArquivoImoveis
+};
