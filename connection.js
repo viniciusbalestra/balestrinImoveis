@@ -46,9 +46,6 @@ async function connect() {
     };
 }
 
-    };
-}
-
 async function testConnection() {
     const connection = await connect();
     if (connection) {
@@ -83,16 +80,11 @@ testConnection();
     } else {
         console.log('Falha ao obter conexão.');
     };
-}
+
 
 testConnection();
 
 const pool = mysql.createPool(dbConfig);
 console.log("Pool de conexões criado."); // Mensagem indicando a criação do pool
-const pool = mysql.createPool(dbConfig);
-console.log("Pool de conexões criado."); // Mensagem indicando a criação do pool
-
-
-module.exports = {connect, pool};
 
 module.exports = {connect, pool};
