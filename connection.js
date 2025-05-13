@@ -1,6 +1,6 @@
-require('dotenv').config(); // Carrega variáveis de ambiente do arquivo .env
-
-const mysql = require('mysql2/promise'); // Importa a versão promise do mysql2
+///Realiza a conexão do banco de dados
+require('dotenv').config();
+const mysql = require('mysql2/promise');
 
 const dbConfig = {
     host: process.env.DB_HOST,
@@ -8,64 +8,55 @@ const dbConfig = {
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
     port: 3306,
-    waitForConnections: true, // Espera por conexões disponíveis se todas estiverem em uso
-    connectionLimit: 10, // Número máximo de conexões no pool
+    waitForConnections: true, // Se true, espera por conexões disponíveis se todas estiverem em uso. Se false, retorna um erro imediatamente.
+    connectionLimit: 10, // Número máximo de conexões no pool.
     queueLimit: 0 // Número máximo de requisições em fila esperando por uma conexão. 0 significa sem limite.
 };
 
-console.log(dbConfig); // Exibe a configuração do banco de dados (remova em produção por segurança)
+console.log(dbConfig)
 
-/**
- * Estabelece uma conexão individual com o banco de dados MySQL.
- * @returns {Promise<mysql.Connection | null>} Uma Promise que resolve para um objeto de conexão MySQL ou null em caso de erro.
- */
 async function connect() {
     try {
         const connection = await mysql.createConnection(dbConfig);
         console.log("Conexão individual ao banco de dados estabelecida.");
+        
 
         // Teste de conexão
-        await connection.execute('SELECT 1'); // Executa uma query simples para verificar a conexão
+        await connection.execute('SELECT 1'); // Executa uma query simples
         console.log("Teste de conexão bem-sucedido.");
 
-        return connection; // Retorna a conexão
-
+        
+        return connection;
+    
     } catch (error) {
-        console.error("Erro ao conectar ao banco de dados (conexão individual):", error.message, error.code);
+        console.error("Erro ao conectar ao banco de dados (conexão individual):", error.message, error.code); // Mensagem de erro 
         return null; // Retorna null em caso de erro
-    } finally { //Adicionado para fechar a conexão em caso de sucesso ou falha
-        if (connection) {
-            connection.end();
-            console.log('Conexão fechada após o uso.');
-        }
-    }
+    };
 }
 
-/**
- * Testa a conexão com o banco de dados, obtendo uma conexão do pool e realizando uma query.
- * @returns {Promise<void>}
- */
 async function testConnection() {
-    try {
-        const connection = await pool.getConnection(); // Obtém uma conexão do pool
-        console.log('Conexão obtida do pool com sucesso. Testando...');
-        const [rows] = await connection.execute('SELECT 1 + 1 AS solution');
-        console.log("Teste bem-sucedido!", rows);
-        connection.release(); // Devolve a conexão ao pool
-        console.log('Conexão devolvida ao pool.');
-    } catch (error) {
-        console.error("Erro ao testar conexão do pool:", error);
-    }
+    const connection = await connect();
+    if (connection) {
+        console.log('Conexão obtida com sucesso. Testando...');
+        try{
+            const [rows] = await connection.execute('SELECT 1 + 1 AS solution');
+            console.log("Teste bem sucedido!", rows);
+        } catch (error) {
+            console.error("Erro durante o teste: ", error);
+        } finally{
+            connection.end(); // Fecha a conexão
+            console.log('Conexão fechada.');
+        }
+    } else {
+        console.log('Falha ao obter conexão.');
+    };
 }
 
-testConnection(); // Chama a função de teste
+testConnection();
 
-const pool = mysql.createPool(dbConfig); // Cria um pool de conexões
-console.log("Pool de conexões criado.");
+const pool = mysql.createPool(dbConfig);
+console.log("Pool de conexões criado."); // Mensagem indicando a criação do pool
 
-// Adiciona tratamento de erro para o pool
-pool.on('error', (err) => {
-  console.error('Erro no pool de conexões:', err);
-});
 
-module.exports = { connect, pool }; // Exporta as funções e o pool
+
+module.exports = {connect, pool};
