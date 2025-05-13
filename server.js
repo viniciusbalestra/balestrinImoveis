@@ -1,4 +1,5 @@
 ///Define as funções do servidor
+
 const express = require('express'); // Importa o módulo Express
 const app = express(); // Cria uma instância do aplicativo Express
 const port = 3001; // Define a porta
