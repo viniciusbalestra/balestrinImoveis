@@ -27,8 +27,6 @@ As principais funcionalidades do sistema incluem:
 * Node.js
 * Express
 * MySQL
-* Multer (para upload de arquivos)
-* CORS
 * dotenv
 * fs
 * path
