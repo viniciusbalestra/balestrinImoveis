@@ -14,10 +14,10 @@
     "tamanhoAreaConst": null,
     "qtdQuartos": null,
     "qtdBanheiros": null,
-    "destaque": 0,
-    "eDisponivel": 0,
     "fotoCapa": "squareResidence.jpg",
-    "url": null
+    "url": null,
+    "destaque": false,
+    "eDisponivel": false
   },
   {
     "id": "4af56fff-ee06-11ef-b2e6-089798640dfe",
@@ -34,15 +34,15 @@
     "tamanhoAreaConst": null,
     "qtdQuartos": null,
     "qtdBanheiros": null,
-    "destaque": 0,
-    "eDisponivel": 0,
     "fotoCapa": "olympus.png",
-    "url": "https://sf.vgvcontrol.com.br/perfil/eder-balestrin/olympus?t=20240926093154"
+    "url": "https://sf.vgvcontrol.com.br/perfil/eder-balestrin/olympus?t=20240926093154",
+    "destaque": false,
+    "eDisponivel": false
   },
   {
     "id": "4f6aceca-ee06-11ef-b2e6-089798640dfe",
     "categoria": "planta",
-    "titulo": "Residencial Terrazzo",
+    "titulo": "Residencial Terrazo",
     "slogan": "O privilégio de aproveitar o melhor da vida",
     "localizacao": "R. Olindo Periolo, 655",
     "valor": null,
@@ -54,10 +54,10 @@
     "tamanhoAreaConst": null,
     "qtdQuartos": null,
     "qtdBanheiros": null,
-    "destaque": 0,
-    "eDisponivel": 0,
     "fotoCapa": "residencialTerrazo.jpg",
-    "url": "https://jl.vgvcontrol.com.br/perfil/eder-balestrin/terrazzo"
+    "url": "https://jl.vgvcontrol.com.br/perfil/eder-balestrin/terrazzo",
+    "destaque": false,
+    "eDisponivel": false
   },
   {
     "id": "69ee671a-ee49-11ef-b2e6-089798640dfe",
@@ -74,9 +74,251 @@
     "tamanhoAreaConst": null,
     "qtdQuartos": null,
     "qtdBanheiros": null,
-    "destaque": 0,
-    "eDisponivel": 0,
-    "fotoCapa": "insideHomeClube.png",
-    "url": "https://wustcasarotto.vgvcontrol.com.br/perfil/eder-balestrin/inside-home-club"
+    "fotoCapa": "insideHomeClub.png",
+    "url": "https://wustcasarotto.vgvcontrol.com.br/perfil/eder-balestrin/inside-home-club",
+    "destaque": false,
+    "eDisponivel": false
+  },
+  {
+    "id": "eb14d05c-4a21-11f0-b10a-089798640dfe",
+    "categoria": "terceiros",
+    "titulo": "Casa Isolada",
+    "slogan": null,
+    "localizacao": "São Francisco de Assis, 380 | Cascavel/PR",
+    "valor": "1850000.00",
+    "tipo": "casa",
+    "metragem": 320,
+    "fotos": [
+      "casasolada.jpg"
+    ],
+    "vagas": 2,
+    "descricao": null,
+    "tamanhoAreaConst": "320.00",
+    "qtdQuartos": 3,
+    "qtdBanheiros": 3,
+    "fotoCapa": "casaIsolada.jpg",
+    "url": "https://vgv.com/imoveis/casaisolada",
+    "destaque": false,
+    "eDisponivel": false
+  },
+  {
+    "id": "eb1e6928-4a21-11f0-b10a-089798640dfe",
+    "categoria": "terceiros",
+    "titulo": "Chácara Com Lago",
+    "slogan": null,
+    "localizacao": "Palmeiras, 120 | Cascavel/PR",
+    "valor": "3500000.00",
+    "tipo": "chacara",
+    "metragem": 800,
+    "fotos": [
+      "chacaraComLago.jpg"
+    ],
+    "vagas": 4,
+    "descricao": null,
+    "tamanhoAreaConst": "800.00",
+    "qtdQuartos": 4,
+    "qtdBanheiros": 3,
+    "fotoCapa": "chacaraComLago.jpg",
+    "url": "https://vgv.com/imoveis/chacaracomlago",
+    "destaque": false,
+    "eDisponivel": false
+  },
+  {
+    "id": "eb225720-4a21-11f0-b10a-089798640dfe",
+    "categoria": "terceiros",
+    "titulo": "Fazenda São Tomé",
+    "slogan": null,
+    "localizacao": "Estrada Velha, KM 5 | Cascavel/PR",
+    "valor": "4800000.00",
+    "tipo": "fazenda",
+    "metragem": 1500,
+    "fotos": [
+      "fazendaSaoTome.jpg"
+    ],
+    "vagas": 5,
+    "descricao": null,
+    "tamanhoAreaConst": "1500.00",
+    "qtdQuartos": 5,
+    "qtdBanheiros": 4,
+    "fotoCapa": "fazendaSaoTome.jpg",
+    "url": "https://vgv.com/imoveis/fazendasaotome",
+    "destaque": false,
+    "eDisponivel": false
+  },
+  {
+    "id": "eb2259ed-4a21-11f0-b10a-089798640dfe",
+    "categoria": "terceiros",
+    "titulo": "Apartamento Conjugado",
+    "slogan": null,
+    "localizacao": "Paraná, 2500 | Cascavel/PR",
+    "valor": "850000.00",
+    "tipo": "apartamento",
+    "metragem": 60,
+    "fotos": [
+      "apartamentoConjugado.jpg"
+    ],
+    "vagas": 0,
+    "descricao": null,
+    "tamanhoAreaConst": "60.00",
+    "qtdQuartos": 1,
+    "qtdBanheiros": 1,
+    "fotoCapa": "apartamentoConjugado.jpg",
+    "url": "https://vgv.com/imoveis/apartamentoconjugado",
+    "destaque": false,
+    "eDisponivel": false
+  },
+  {
+    "id": "eb225b2a-4a21-11f0-b10a-089798640dfe",
+    "categoria": "terceiros",
+    "titulo": "Apartamento Conceito Aberto",
+    "slogan": null,
+    "localizacao": "Av. Brasil, 1500 | Cascavel/PR",
+    "valor": "1200000.00",
+    "tipo": "apartamento",
+    "metragem": 95,
+    "fotos": [
+      "apartamentoConceitoAberto.jpg"
+    ],
+    "vagas": 1,
+    "descricao": null,
+    "tamanhoAreaConst": "95.00",
+    "qtdQuartos": 2,
+    "qtdBanheiros": 2,
+    "fotoCapa": "apartamentoConceitoAberto.jpg",
+    "url": "https://vgv.com/imoveis/apartamentoconceitoaberto",
+    "destaque": false,
+    "eDisponivel": false
+  },
+  {
+    "id": "eb225bed-4a21-11f0-b10a-089798640dfe",
+    "categoria": "terceiros",
+    "titulo": "Apartamento Com Varanda",
+    "slogan": null,
+    "localizacao": "Marechal Cândido Rondon, 789 | Cascavel/PR",
+    "valor": "980000.00",
+    "tipo": "apartamento",
+    "metragem": 80,
+    "fotos": [
+      "apartamentoComVaranda.jpg"
+    ],
+    "vagas": 1,
+    "descricao": null,
+    "tamanhoAreaConst": "80.00",
+    "qtdQuartos": 2,
+    "qtdBanheiros": 2,
+    "fotoCapa": "apartamentoComVaranda.jpg",
+    "url": "https://vgv.com/imoveis/apartamentocomvaranda",
+    "destaque": false,
+    "eDisponivel": false
+  },
+  {
+    "id": "eb225c85-4a21-11f0-b10a-089798640dfe",
+    "categoria": "terceiros",
+    "titulo": "Vista Para As Montanhas",
+    "slogan": null,
+    "localizacao": "Flores, 45 | Cascavel/PR",
+    "valor": "750000.00",
+    "tipo": "terreno",
+    "metragem": 450,
+    "fotos": [
+      "vistaParaAsMontanhas.jpg"
+    ],
+    "vagas": 0,
+    "descricao": null,
+    "tamanhoAreaConst": "450.00",
+    "qtdQuartos": 0,
+    "qtdBanheiros": 0,
+    "fotoCapa": "vistaParaAsMontanhas.jpg",
+    "url": "https://vgv.com/imoveis/vistaparaasmontanhas",
+    "destaque": false,
+    "eDisponivel": false
+  },
+  {
+    "id": "eb225d23-4a21-11f0-b10a-089798640dfe",
+    "categoria": "terceiros",
+    "titulo": "Casa Americana",
+    "slogan": null,
+    "localizacao": "Belo Horizonte, 1000 | Cascavel/PR",
+    "valor": "2100000.00",
+    "tipo": "casa",
+    "metragem": 400,
+    "fotos": [
+      "casaAmericana.jpg"
+    ],
+    "vagas": 3,
+    "descricao": null,
+    "tamanhoAreaConst": "400.00",
+    "qtdQuartos": 4,
+    "qtdBanheiros": 3,
+    "fotoCapa": "casaAmericana.jpg",
+    "url": "https://vgv.com/imoveis/casaamericana",
+    "destaque": false,
+    "eDisponivel": false
+  },
+  {
+    "id": "eb225db5-4a21-11f0-b10a-089798640dfe",
+    "categoria": "terceiros",
+    "titulo": "Casa Estilo Industrial",
+    "slogan": null,
+    "localizacao": "Souza Naves, 200 | Cascavel/PR",
+    "valor": "2500000.00",
+    "tipo": "casa",
+    "metragem": 280,
+    "fotos": [
+      "casaEstiloIndustrial.jpg"
+    ],
+    "vagas": 2,
+    "descricao": null,
+    "tamanhoAreaConst": "280.00",
+    "qtdQuartos": 3,
+    "qtdBanheiros": 2,
+    "fotoCapa": "casaEstiloIndustrial.jpg",
+    "url": "https://vgv.com/imoveis/casaestiloindustrial",
+    "destaque": false,
+    "eDisponivel": false
+  },
+  {
+    "id": "eb225e50-4a21-11f0-b10a-089798640dfe",
+    "categoria": "terceiros",
+    "titulo": "Casa No Bosque",
+    "slogan": null,
+    "localizacao": "Alameda dos Ipês, 77 | Cascavel/PR",
+    "valor": "3100000.00",
+    "tipo": "casa",
+    "metragem": 550,
+    "fotos": [
+      "casaNoBosque.jpg"
+    ],
+    "vagas": 3,
+    "descricao": null,
+    "tamanhoAreaConst": "550.00",
+    "qtdQuartos": 4,
+    "qtdBanheiros": 4,
+    "fotoCapa": "casaNoBosque.jpg",
+    "url": "https://vgv.com/imoveis/casanobosque",
+    "destaque": false,
+    "eDisponivel": false
+  },
+  {
+    "id": "eb225ee3-4a21-11f0-b10a-089798640dfe",
+    "categoria": "terceiros",
+    "titulo": "Casa Com Gramado",
+    "slogan": null,
+    "localizacao": "Rio Grande do Sul, 1234 | Cascavel/PR",
+    "valor": "2900000.00",
+    "tipo": "casa",
+    "metragem": 480,
+    "fotos": [
+      "casaComGramado.jpg"
+    ],
+    "vagas": 3,
+    "descricao": null,
+    "tamanhoAreaConst": "480.00",
+    "qtdQuartos": 4,
+    "qtdBanheiros": 3,
+    "fotoCapa": "casaComGramado.jpg",
+    "url": "https://vgv.com/imoveis/casacomgramado",
+    "destaque": false,
+    "eDisponivel": false
   }
 ]

@@ -9,11 +9,6 @@ const jsonFilePath = path.join(__dirname, 'allImoveis.json');
 
 ///consulta os imoveis no banco de dados (separa por categoria)
 async function getAllImoveis(categoria) {
-
-
-
-
-
     try {
         const [rows] = await pool.execute('SELECT * FROM imoveis WHERE categoria = ?', [categoria]);
 
@@ -26,13 +21,13 @@ async function getAllImoveis(categoria) {
                 row.localizacao,
                 row.valor,
                 row.tipo,
-                row.descricao,
                 row.metragem,
+                row.fotos,
+                row.vagas,
+                row.descricao,
                 row.tamanhoAreaConst,
                 row.qtdQuartos,
-                row.vagas,
                 row.qtdBanheiros,
-                row.fotos,
                 row.fotoCapa,
                 row.url
             );
@@ -42,9 +37,6 @@ async function getAllImoveis(categoria) {
         });
 
         console.log(imoveis, "2");
-
-
-
         return imoveis;
 
     } catch (error) {
