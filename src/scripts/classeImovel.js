@@ -6,21 +6,19 @@ class Imovel {
     localizacao;
     valor;
     tipo;
-    descricao;
     metragem;
+    fotos;
+    vagas;
+    descricao;
     tamanhoAreaConst;
     qtdQuartos;
-    vagas;
     qtdBanheiros;
-    fotos;
     fotoCapa;
     url;
     destaque = false;
     eDisponivel = false;
-    
 
-
-    constructor (id, categoria, titulo, slogan, localizacao, valor, tipo, descricao, metragem, tamanhoAreaConst, qtdQuartos, vagas, qtdBanheiros, fotos, fotoCapa, url) {
+    constructor (id, categoria, titulo, slogan, localizacao, valor, tipo, metragem, fotos, vagas,  descricao, tamanhoAreaConst, qtdQuartos, qtdBanheiros, fotoCapa, url) {
         this.id = id;
         this.categoria = categoria;
         this.titulo = titulo;
