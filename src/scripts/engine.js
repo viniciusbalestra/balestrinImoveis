@@ -71,7 +71,7 @@ function gerarHtmlImovel(imovel) {
                     <div>
                         <div class="detail detail-1">
                             <img src="/src/assets/interativo/icons8-localização-24.png" alt="icone-mapa">
-                            <p>${imovel.localizacao}</p>
+                            <p>R. ${imovel.localizacao}</p>
                         </div>
                     </div>
                     <h3 class="${divClass}-titulo">${imovel.titulo}</h3>

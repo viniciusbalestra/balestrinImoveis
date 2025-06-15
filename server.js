@@ -1,3 +1,4 @@
+
 ///Define as funções do servidor
 const express = require('express'); // Importa o módulo Express
 const app = express(); // Cria uma instância do aplicativo Express
@@ -6,7 +7,6 @@ const {connect} = require('./connection');
 const fs = require('fs/promises');
 const {pool} = require('./connection');
 const {insertImoveis, queryDatabase} = require('./queries'); 
-const {receberValores} = require('./src/scripts/cadastro.js')
 
 app.use(express.json());
 
@@ -25,21 +25,6 @@ app.get('/imoveis', async (req, res) => {
     }
 });
 
-app.post('/api/cadastrar-imovel',async (req, res) => {
-    try {
-        const imoveis = req.body;
-
-        if (imoveis) {
-            await insertImoveis(imoveis);
-            res.status(200).json({message: "Imóvel cadastrado com sucesso!"});
-        } else {
-            res.status(400).json({message: "Dados inválidos."})
-        }
-    } catch(error) {
-        console.error("Erro ao receber imóveis: ", error);
-        res.status(500).json({message: 'Não foi possível receber imóveis, erro no servidor.'})
-    }
-})
 
 
 app.post('/sincronizar-imoveis', async (req, res) => {
@@ -48,6 +33,8 @@ app.post('/sincronizar-imoveis', async (req, res) => {
         const imoveis = JSON.parse(data);
 
         await insertImoveis(imoveis);
+
+
 
         res.status(200).json({mensagem: 'Imóveis sincronizados com sucesso.'})
     } catch(error) {
