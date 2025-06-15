@@ -16,7 +16,9 @@
                 <div id="titulo-cadastro">
                     <legend>Dados do Imóvel</legend>
                 </div>
-                
+
+                <label for="titulo">Nome do imóvel*</label>
+                <input class="gerais-espacos" type="text" name="titulo" id="titulo" required>
 
                 <label for="tipo">Tipo*</label>
                 <select class="gerais-espacos" id="tipo" required>
@@ -29,10 +31,7 @@
                     <option value="fazenda">Fazenda</option>
                     <option value="sitio/chacara">Sítio/Chácara</option>
                     <option value="comercio">Comércio</option>
-                    </select>
-        
-                <label for="titulo">Nome do imóvel*</label>
-                <input class="gerais-espacos" type="text" name="titulo" id="titulo" required>
+                </select>
         
                 <fieldset id="fieldset-endereco">
                     <div id="ruaDiv">
@@ -82,8 +81,8 @@
             </fieldset>
         
             <fieldset id="fieldset-categoria-imovel">
-                <legend>Tipo de Imóvel</legend>
-                <span class="tipo-imovel-input">
+                <legend>Categoria do Imóvel</legend>
+                <span class="categoria-imovel-input">
                     <input type="radio" name="categoriaImovel" value="planta" id="planta">
                     <label for="planta">Imóveis na planta</label>
                 </span>
@@ -110,5 +109,6 @@
         </form>
     </main>
     <div id="footer-container"></div>
-    <script type="module" src="/src/scripts/cadastro.js"></script>
+    <script src="/src/scripts/cadastro.cjs"></script>
 </body>
+</html>

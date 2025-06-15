@@ -1,40 +1,46 @@
-import { insertImoveis } from './queries.js'; // Importa a função insertImoveis do módulo queries.js
-
-const formulario = document.getElementById('cadastro-imovel'); // Obtém o elemento do formulário pelo ID
-const inputFotos = formulario.querySelector('[name="fotos"]'); // Obtém o campo de input de fotos
-const selectFotoCapa = formulario.querySelector('[name="fotoCapa"]'); // Obtém o select de seleção da foto de capa
+const formulario = document.getElementById('cadastro-imovel'); // Obtém o elemento do 
 
 // Obtém os campos do formulário
-const tipo = document.getElementById("tipo");
-const titulo = document.getElementById("titulo");
-const rua = document.getElementById("rua");
-const numero = document.getElementById("numero");
-const cidade = document.getElementById("cidade");
-const estado = document.getElementById("estado");
-const slogan = document.getElementById("slogan");
-const valor = document.getElementById("valor");
-const descricao = document.getElementById("descricao");
-const metragem = document.getElementById("metragem");
-const qtdQuartos = document.getElementById("qtdQuartos");
-const vagas = document.getElementById("vagas");
-const qtdBanheiros = document.getElementById("qtdBanheiros");
-const url = document.getElementById("url");
-const fotos = document.getElementById("fotos");
-const fotoCapa = document.getElementById("fotoCapa");
-let disponibilidade = false; // Inicializa a variável de disponibilidade
+/*
+const categoria = document.getElementById("fieldset-categoria-imovel").value;
+console.log(categoria);
+const titulo = document.getElementById("titulo").value;
+const slogan = document.getElementById("slogan").value;
+const rua = document.getElementById("rua").value;
+const numero = document.getElementById("numero").value;
+const cidade = document.getElementById("cidade").value;
+const estado = document.getElementById("estado").value;
+const valor = document.getElementById("valor").value;
+const tipo = document.getElementById("tipo").value;
+const metragem = document.getElementById("metragem").value;
+const fotos = formulario.querySelector('[name="fotos"]');
+const vagas = document.getElementById("vagas").value;
+const descricao = document.getElementById("descricao").value;
+const tamanhoAreaConst = '';
+const qtdQuartos = document.getElementById("qtdQuartos").value;
+const qtdBanheiros = document.getElementById("qtdBanheiros").value;
+const fotoCapa = formulario.querySelector('[name="fotoCapa"]');
+const url = document.getElementById("url").value;
+let destaque = false;
+let eDisponivel = false;
+let imoveis = [];
+const localizacao = rua + ", " + numero + "|" + cidade + "/" + estado;
+*/
 
 const iconeDisponibilidade = document.getElementById('icone-disponibilidade'); // Obtém o ícone de disponibilidade
 const botaoDisponibilidade = document.getElementById("verificar-disponibilidade"); // Obtém o botão de verificar disponibilidade
 
+/*
 // Adiciona um listener para o evento de clique do botão de disponibilidade
 botaoDisponibilidade.addEventListener('click', () => {
-    disponibilidade = !disponibilidade; // Alterna o valor da disponibilidade
+    eDisponivel = !eDisponivel;
 
     // Alterna a exibição do ícone de disponibilidade
-    iconeDisponibilidade.style.display = disponibilidade ? 'inline' : 'none';
+    iconeDisponibilidade.style.display = eDisponivel ? 'inline' : 'none';
 });
+*/
 
-console.log(disponibilidade); // Exibe o valor inicial da disponibilidade no console (remova em produção)
+//console.log(eDisponivel); // Exibe o valor inicial da disponibilidade no console (remova em produção)
 
 // Adiciona um listener para o evento de change do campo de fotos
 fotos.addEventListener('change', () => {
@@ -62,48 +68,53 @@ fotos.addEventListener('change', () => {
     }
 });
 
-/**
- * Envia os dados do formulário para o backend.
- * @param {Event} event O evento de submit do formulário.
- */
-async function receberValores(event) {
-    event.preventDefault(); // Previne o comportamento padrão do formulário (recarregar a página)
+async function receberValores() {
+    const formData = new FormData(document.getElementById('cadastro-imovel'));
+    let dadosDoImovel = {};
 
-    const formData = new FormData(formulario); // Cria um objeto FormData com os dados do formulário
-    //adicionado tratamento para o caso de não haver fotos
-    if(fotos.files.length > 0){
-      formData.append('fotos', fotos.files);
-    }
-    formData.append('disponibilidade', disponibilidade);
+    formData.forEach((valor, chave) => {
+        dadosDoImovel[chave] = valor;
+    });
+
+    console.log(dadosDoImovel);
 
     try {
-        // Envia os dados para o servidor usando fetch
-        const response = await fetch('/upload', { //rota para o upload de arquivos
-            method: 'POST', // Método HTTP POST
-            body: formData, // Corpo da requisição com os dados do formulário
+        const resposta = await fetch('/api/cadastrar-imovel', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(dadosDoImovel),
         });
 
-        // Verifica se a requisição foi bem-sucedida
-        if (response.ok) {
-            console.log('Dados do imóvel enviados com sucesso!');
-            formulario.reset(); // Limpa o formulário
-            // Limpa a preview
-            const preview = document.getElementById('preview-fotos');
-            preview.innerHTML = '';
-            //reseta o select
-            fotoCapa.innerHTML = '<option value="">Selecione a foto de capa</option>';
-        } else {
-            // Se a requisição falhar, exibe o erro
-            const error = await response.text();
-            console.error('Erro ao enviar dados do imóvel:', error);
-            alert(`Erro ao cadastrar imóvel: ${error}`); // Exibe um alerta com a mensagem de erro
+        if(!resposta.ok) {
+            console.error('Erro ao enviar dados:', resposta.status);
+            alert('Erro ao enviar os dados.');
         }
-    } catch (error) {
-        // Captura erros na requisição fetch
-        console.error('Erro ao enviar dados do imóvel:', error);
-        alert('Erro ao cadastrar imóvel.'); // Exibe um alerta de erro genérico
+
+        const resultado = await resposta.json();
+        console.log('Sucesso: ', resultado);
+        alert('Dados enviados com sucesso!');
+
+    } catch (erro) {
+        console.error('Erro de rede:', erro);
+        alert('Erro de rede ao tentar enviar os dados.');
     }
 }
+
+/*
+async function receberValores(event) {
+    try {
+        const imoveis = [categoria, titulo, slogan, localizacao, valor, tipo, metragem, fotos, vagas, descricao, tamanhoAreaConst, qtdQuartos, qtdBanheiros, fotoCapa, url, destaque, eDisponivel];
+
+        console.log(imoveis);
+        return imoveis;
+
+    } catch (error) {
+        console.error('Erro ao cadastrar imóvel:', error);
+        alert('Erro ao cadastrar imóvel.'); 
+    }
+}
+*/
 
 // Adiciona um listener para o evento de submit do formulário
 formulario.addEventListener('submit', receberValores);

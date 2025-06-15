@@ -216,6 +216,43 @@ h2 {
 #caracteristicas {
     background-color: var(--cor-branco);
     padding: 4rem;
+    color: var(--cor-texto);
+    letter-spacing: 1px;
+}
+
+.caracteristicas-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: end; /* Opcional: alinha verticalmente os boxes */
+    text-transform: capitalize;
+    margin-top: 2rem;
+}
+
+.caracteristica-box {
+    display: flex; 
+    align-items: center; 
+    text-align: center; 
+    flex-direction: column;
+}
+
+#caracteristicas-titulo{
+    padding: 1.5rem;
+    text-align: center;
+}
+
+#caracteristicas-titulo{
+    color: var(--cor-escura);
+}
+
+.caracateristica-icone {
+    /* Estilos para os ícones */
+    width: 80px; /* Ajuste o tamanho conforme necessário */
+    height: auto; /* Mantém a proporção da imagem */
+    margin-bottom: 1rem; 
+}
+
+#increase-icon {
+    width: 70px;
 }
 
 #rodape {

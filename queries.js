@@ -1,6 +1,9 @@
 ///Executa as consultas no banco de dados
-const { connect, pool } = require('./connection');
-const fs = require('fs/promises');
+//import { connect, pool } from './connection.js';
+const { connect, pool } = require('./connection.js');
+const fs = require('fs');
+
+//Pega todos os imóveis do banco de dados, selecionando por categoria
 async function getAllImoveis(categoria) {
     try {
         const [rows] = await pool.execute('SELECT * FROM imoveis WHERE categoria = ?', [categoria]);
@@ -14,15 +17,17 @@ async function getAllImoveis(categoria) {
                 row.localizacao,
                 row.valor,
                 row.tipo,
-                row.descricao,
                 row.metragem,
+                row.fotos,
+                row.vagas,
+                row.descricao,
                 row.tamanhoAreaConst,
                 row.qtdQuartos,
-                row.vagas,
                 row.qtdBanheiros,
-                row.fotos,
                 row.fotoCapa,
-                row.url
+                row.url,
+                row.destaque,
+                row.eDisponivel
             );
             
             console.log(imovel, "1");
@@ -40,11 +45,7 @@ async function getAllImoveis(categoria) {
     };
 }
 
-/**
- * Gera um arquivo JSON com todos os imóveis da base de dados.
- * @returns {Promise<void>}
- * @throws {Error} Se ocorrer um erro ao buscar os imóveis ou escrever o arquivo.
- */
+//Gera um arquivo JSON com todos os imóveis da base de dados.
 async function queries() {
     try {
         const imoveisPlanta = await getAllImoveis('planta');
@@ -54,12 +55,12 @@ async function queries() {
         console.log("Imóveis de terceiros:", imoveisTerceiros);
 
         imoveisPlanta.forEach(imovel => {
-            console.log(`ID: ${imovel.id}, Categoria: ${imovel.categoria}, Titulo: ${imovel.titulo}, Slogan: ${imovel.slogan}, Localizacao: ${imovel.localizacao}, fotos: ${imovel.fotos}, fotoCapa: ${imovel.fotoCapa}, url: ${imovel.url}`);
+            console.log(`ID: ${imovel.id}, Categoria: ${imovel.categoria}, Titulo: ${imovel.titulo}, Slogan: ${imovel.slogan}, Localizacao: ${imovel.localizacao}, fotos: ${imovel.fotos}, fotoCapa: ${imovel.fotoCapa}, url: ${imovel.url}, destaque:${imovel.destaque}, eDisponivel: ${imovel.eDisponivel}`); 
         });
 
 
         imoveisTerceiros.forEach(imovel => {
-            console.log(`ID: ${imovel.id}, Categoria: ${imovel.categoria}, Titulo: ${imovel.titulo}, Localizacao: ${imovel.localizacao}, Valor: ${imovel.valor}, Tipo ${imovel.tipo}, Metragem: ${imovel.metragem}, fotos: ${imovel.fotos}, qtdBanheiros: ${imovel.qtdBanheiros}, qtdQuartos: ${imovel.qtdQuartos}, vagas: ${imovel.vagas}, fotoCapa: ${imovel.fotoCapa}, url: ${imovel.url}`);
+            console.log(`ID: ${imovel.id}, Categoria: ${imovel.categoria}, Titulo: ${imovel.titulo}, Localizacao: ${imovel.localizacao}, Valor: ${imovel.valor}, Tipo ${imovel.tipo}, Metragem: ${imovel.metragem}, fotos: ${imovel.fotos}, qtdBanheiros: ${imovel.qtdBanheiros}, qtdQuartos: ${imovel.qtdQuartos}, vagas: ${imovel.vagas}, fotoCapa: ${imovel.fotoCapa}, url: ${imovel.url}, destaque:${imovel.destaque}, eDisponivel: ${imovel.eDisponivel}`);
         });
 
         const allImoveis = [...imoveisPlanta, ...imoveisTerceiros];
@@ -78,6 +79,7 @@ async function queries() {
     };
 };
 
+//Cria um diretório para cada imóvel com cujo nome é seu ID
 async function criarPastaImovel(imovelId) {
     const pastaImovel = path.join(__dirname, '/src/assets/uploads', imovelId);
     try {
@@ -89,6 +91,7 @@ async function criarPastaImovel(imovelId) {
     }
 }
 
+//Pega todos os imóveis do arquivo allImoveis.json
 async function getAllImoveisFromJson() {
     try {
         const data = await fs.readFile(jsonFilePath, 'utf-8');
@@ -123,9 +126,10 @@ async function insertImoveis(imoveis) {
             return;
         }
         for (const imovel of imoveis) {
+            //Query com a função INSERT INTO do mysql
             const query = `
-                INSERT INTO imoveis (categoria, titulo, slogan, localizacao, valor, tipo, metragem, tamanhoAreaConst, qtdQuartos, vagas, qtdBanheiros, fotos, fotoCapa, url)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                INSERT INTO imoveis (categoria, titulo, slogan, localizacao, valor, tipo, metragem, fotos, vagas, descricao, tamanhoAreaConst, qtdQuartos,  qtdBanheiros,  fotoCapa, url, destaque, eDisponivel)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 
                 ON DUPLICATE KEY UPDATE
                     categoria = VALUES(categoria),
@@ -135,18 +139,20 @@ async function insertImoveis(imoveis) {
                     valor = VALUES(valor),
                     tipo = VALUES(tipo),
                     metragem = VALUES(metragem),
+                    fotos = VALUES(fotos),
+                    vagas = VALUES(vagas),
+                    descricao = VALUES(descricao),                    
                     tamanhoAreaConst = VALUES(tamanhoAreaConst),
                     qtdQuartos = VALUES(qtdQuartos),
-                    vagas = VALUES(vagas),
                     qtdBanheiros = VALUES(qtdBanheiros),
-                    fotos = VALUES(fotos),
                     fotoCapa = VALUES(fotoCapa),
-                    url = VALUES(url);
+                    url = VALUES(url),
+                    destaque = VALUES(destaque),
+                    eDisponivel = VALUES(eDisponivel);
             `;
 
             const values = [
-                imovel.categoria, imovel.titulo, imovel.slogan, imovel.localizacao, imovel.valor, imovel.tipo, imovel.metragem, imovel.tamanhoAreaConst, imovel.qtdQuartos, imovel.vagas, imovel.qtdBanheiros, imovel.fotos, imovel.fotoCapa, imovel.url
-            ];
+                imovel.categoria, imovel.titulo, imovel.slogan, imovel.localizacao, imovel.valor, imovel.tipo, imovel.metragem, imovel.fotos, imovel.vagas, imovel.descricao, imovel.tamanhoAreaConst, imovel.qtdQuartos,  imovel.qtdBanheiros,  imovel.fotoCapa, imovel.url, imovel.destaque, imovel.eDisponivel];
             try {
                 await pool.execute(query, values);
                 console.log('Imóvel inserido com sucesso: ', imovel.titulo)
@@ -163,6 +169,7 @@ async function insertImoveis(imoveis) {
         throw error;
     };
 }
+
 
 async function queryDatabase() {
     try {
