@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investimentos</title>
+    <link rel="stylesheet" href="/java/src/main/resources/static/styles/style.css">
+    <link rel="icon" type="image/ico" href="/java/src/main/resources/static/assets/favicon/favicon.ico">
+    <script src="/java/src/main/resources/static/scripts/headerFooterLoader.js" defer></script>
+</head>
+<body>
+    <div id="header-container"></div>
+    <main>
+        <h2 id="pagina-investimentos-titulo">IMÓVEIS</h2>
+        <form id="investimentos-menu">
+            <p id="investimentos-menu-titulo">Tipo de imóvel</p>
+            <span class="botao-container">
+                <input type="radio" name="TIPO" value="PLANTA" id="botao-planta" class="botoes"  onclick="exibirImoveis('investimentos/PLANTA')">
+                <label for="botao-planta">Imóveis na planta</label>
+            </span>
+            <span class="botao-container" id="botao-container-terceiros">
+                <input type="radio" name="TIPO" value="TERCEIROS" id="botao-terceiros" class="botoes"  onclick="exibirImoveis('investimentos/TERCEIROS')">
+                <label for="botao-terceiros">Imóveis de terceiros</label>
+            </span>
+            <span class="botao-container" id="botao-container-todos">
+                <input type="radio" name="TIPO" value="todos" id="botao-terceiros" class="botoes" onclick="exibirImoveis('investimentos')">
+                <label for="botao-todos">Todos os imóveis</label>
+            </span>
+        </form>        
+        <section id="pagina-investimentos">
+        </section>
+    </main>
+    <div id="footer-container"></div>
+    <script src="/java/src/main/resources/static/scripts/engine.js"></script>
+</body>
+</html>
