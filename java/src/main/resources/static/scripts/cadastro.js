@@ -62,25 +62,23 @@ async function chamarMetodoHTML(pagina, metodo, dados) {
 
         if (!resposta.ok) {
             console.error('Erro ao enviar dados:', resposta.status);
-            alert('Erro ao enviar os dados.');
         }
 
         let resultado = null;
         try {
+
             resultado = await resposta.json();
+            console.log('Sucesso: ', resultado);
+
         } catch (jsonError) {
             // Se a resposta não for JSON (ex: 204 No Content), resultado será null
             console.warn(`Resposta de /api/${pagina} não é JSON. Status: ${resposta.status}`);
         }
 
-        console.log('Sucesso: ', resultado);
-        alert('Dados enviados com sucesso!');
-
         return resultado;
 
     } catch (erro) {
         console.error('Erro de rede:', erro);
-        alert('Erro de rede ao tentar enviar os dados.');
     }
 }
 
@@ -111,7 +109,6 @@ async function uploadFotosParaS3(imovelId, files) {
 
     } catch (error) {
         console.error('Erro na função uploadFotosParaS3:', error);
-        alert(`Falha no upload das fotos: ${error.message}. O imóvel foi cadastrado, mas as fotos podem não ter sido enviadas.`);
         return []; // Retorna array vazio para que o processo possa continuar
     }
 }
@@ -145,17 +142,21 @@ async function receberValores(event) {
         event.preventDefault();
     }
     
-    let imovelCadastrado = null;
-    let chavesS3DasFotos = [];
-
-    const dadosDoImovel = coletarDadosDoFormulario();
-    console.log('Dados do imóvel para o cadastro inicial:', dadosDoImovel);
-
     try {
+        let imovelCadastrado = null;
+        let chavesS3DasFotos = [];
+
+        const dadosDoImovel = coletarDadosDoFormulario();
+        console.log('Dados do imóvel para o cadastro inicial:', dadosDoImovel);
 
         imovelCadastrado = await chamarMetodoHTML('cadastro', 'POST', dadosDoImovel);
     } catch (error) {
+        
         return; 
+    }
+
+    if (!imovelCadastrado || imovelCadastrado.id === undefined || imovelCadastrado === null) {
+        return;
     }
 
     const imovelId = imovelCadastrado.id;
@@ -182,8 +183,6 @@ async function receberValores(event) {
 
     try {
         await chamarMetodoHTML(`imoveis/${imovelId}/fotos`, 'PATCH', dadosParaAtualizarFotos);
-
-        alert('Imóvel cadastrado e fotos salvas com sucesso!');
         resetarFormulario();
 
     } catch (error) {

@@ -84,7 +84,14 @@ public class ImovelService {
     @Transactional
     public ResponseEntity<ImovelDTO> cadastrar(String dados, UriComponentsBuilder uriBuilder) throws JsonProcessingException {
 
-        var imovel = objectMapper.readValue(dados, Imovel.class);
+        System.out.println(dados);
+        Imovel imovel = new Imovel();
+
+        try {
+            imovel = objectMapper.readValue(dados, Imovel.class);
+        } catch (NullPointerException e) {
+            System.out.println("imóvel é null");
+        }
 
         imovel.setFotos(null);
         imovel.setCapa(null);
