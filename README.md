@@ -45,37 +45,6 @@ As principais funcionalidades do sistema incluem:
 
 O projeto é dividido em duas partes principais: `backend` (Spring Boot) e `frontend` (HTML/CSS/JS puro).
 
-balestrin-imoveis/
-├── backend/                  # Diretório do projeto Spring Boot
-│   ├── src/
-│   │   ├── main/
-│   │   │   ├── java/         # Código-fonte Java do backend
-│   │   │   │   └── com/seuprojeto/
-│   │   │   │       ├── BalestrinImoveisApplication.java # Classe principal
-│   │   │   │       ├── controller/  # Controladores REST
-│   │   │   │       ├── service/     # Camada de serviço/lógica de negócio
-│   │   │   │       ├── repository/  # Interfaces Spring Data JPA
-│   │   │   │       ├── model/       # Entidades JPA (Imovel, Endereco, Foto)
-│   │   │   │       └── dto/         # Objetos de Transferência de Dados (ImovelDTO, EnderecoDTO)
-│   │   │   └── resources/    # Recursos do Spring Boot (application.properties, etc.)
-│   │   │       ├── application.properties # Configurações do DB, servidor, etc.
-│   │   │       └── static/   # Recursos estáticos (opcional, se servir frontend pelo Spring)
-│   ├── pom.xml               # Arquivo de configuração do Maven
-│   └── .env.example          # Exemplo de variáveis de ambiente do backend
-├── frontend/                 # Diretório da aplicação frontend
-│   ├── index.html            # Página inicial
-│   ├── pages/                # Outras páginas HTML (contato.html, investimentos.html, cadastro.html)
-│   │   └── cadastro.html
-│   ├── scripts/              # Arquivos JavaScript
-│   │   ├── cadastro.js
-│   │   └── headerFooterLoader.js
-│   │   └── engine.js
-│   ├── styles/               # Arquivos CSS
-│   │   └── style.css
-│   ├── assets/               # Imagens, ícones, etc.
-│   └── favicon/
-└── README.md                 # Este arquivo
-
 ## Configuração e Execução
 
 ### Pré-requisitos
