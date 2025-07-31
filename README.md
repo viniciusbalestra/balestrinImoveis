@@ -25,7 +25,7 @@ As principais funcionalidades do sistema incluem:
 * **Spring Boot**: Framework para desenvolvimento rápido de APIs RESTful.
 * **Spring Data JPA**: Para persistência de dados e interação com o banco de dados.
 * **Hibernate**: Implementação de JPA.
-* **MySQL Driver (Connector/J)**: Para conexão com o banco de dados MySQL.
+* **MySQL Driver**: Para conexão com o banco de dados MySQL.
 * **Lombok**: Para reduzir boilerplate code (getters, setters, construtores).
 * **Jackson**: Para serialização/desserialização de JSON.
 * **Spring Web**: Para construir a API RESTful.
